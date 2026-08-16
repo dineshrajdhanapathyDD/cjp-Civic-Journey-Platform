@@ -136,6 +136,9 @@ Every MCP operation, every vector search, every database write is visible in the
 **7. Live Production Deployment**
 Not a demo on localhost. The full system runs at https://cjp-fawn.vercel.app with real CockroachDB Cloud connectivity, real Bedrock inference, and real vector search — verified working with `/api/health` returning `{"status": "healthy", "database": "connected"}`.
 
+
+
+
 ---
 
 ## What we learned

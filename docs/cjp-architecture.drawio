@@ -1,284 +1,315 @@
 <mxfile host="65bd71144e">
-    <diagram id="cjp-main-architecture" name="CJP System Architecture">
-        <mxGraphModel dx="536" dy="563" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="900" math="0" shadow="0">
+    <diagram id="cjp-system" name="System Architecture">
+        <mxGraphModel dx="145" dy="223" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1920" pageHeight="1080" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
-                <mxCell id="2" value="CJP — Civic Journey Platform&lt;br&gt;From Citizen Voice to Accountable Action&lt;div&gt;&lt;br/&gt;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=18;fontStyle=1;fontColor=#1a1a2e;" vertex="1" parent="1">
-                    <mxGeometry x="855" y="120" width="350" height="80" as="geometry"/>
+                <mxCell id="58" value="CJP — Civic Journey Platform&lt;br&gt;From Citizen Voice to Accountable Action&lt;div&gt;&lt;br/&gt;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=20;fontStyle=1;fontColor=#1a1a2e;" vertex="1" parent="1">
+                    <mxGeometry x="715" y="210" width="390" height="90" as="geometry"/>
                 </mxCell>
-                <mxCell id="3" value="User Layer" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#6c757d;strokeWidth=2;dashed=1;verticalAlign=top;fontStyle=1;fontSize=11;" vertex="1" parent="1">
-                    <mxGeometry x="810" y="190" width="240" height="90" as="geometry"/>
+                <mxCell id="59" value="Citizen / User" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;" vertex="1" parent="1">
+                    <mxGeometry x="900" y="300" width="40" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="4" value="Citizen / User" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
-                    <mxGeometry x="870" y="210" width="30" height="50" as="geometry"/>
+                <mxCell id="60" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=2;opacity=20;" vertex="1" parent="1">
+                    <mxGeometry x="490" y="400" width="860" height="80" as="geometry"/>
                 </mxCell>
-                <mxCell id="5" value="Web Browser" style="shape=mxgraph.cisco.computers_and_peripherals.laptop;html=1;pointerEvents=1;dashed=0;fillColor=#97D077;strokeColor=none;strokeWidth=2;outlineConnect=0;fontColor=#333333;" vertex="1" parent="1">
-                    <mxGeometry x="970" y="217" width="60" height="38" as="geometry"/>
+                <mxCell id="61" value="Frontend — React 18 + TypeScript + Tailwind CSS + Vite (Vercel Static)" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=11;fontStyle=1;fontColor=#6c8ebf;" vertex="1" parent="1">
+                    <mxGeometry x="710" y="400" width="420" height="20" as="geometry"/>
                 </mxCell>
-                <mxCell id="6" value="Frontend — React + TypeScript + Tailwind CSS" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=2;verticalAlign=top;fontStyle=1;fontSize=11;opacity=30;" vertex="1" parent="1">
-                    <mxGeometry x="570" y="310" width="720" height="100" as="geometry"/>
+                <mxCell id="62" value="Dashboard" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" vertex="1" parent="1">
+                    <mxGeometry x="510" y="430" width="100" height="35" as="geometry"/>
                 </mxCell>
-                <mxCell id="7" value="Dashboard" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" vertex="1" parent="1">
-                    <mxGeometry x="590" y="340" width="100" height="40" as="geometry"/>
+                <mxCell id="63" value="Civic Agent&#10;Chat" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" vertex="1" parent="1">
+                    <mxGeometry x="630" y="430" width="100" height="35" as="geometry"/>
                 </mxCell>
-                <mxCell id="8" value="Civic Agent&#10;Chat UI" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" vertex="1" parent="1">
-                    <mxGeometry x="710" y="340" width="100" height="40" as="geometry"/>
+                <mxCell id="64" value="Issues&#10;Explorer" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" vertex="1" parent="1">
+                    <mxGeometry x="750" y="430" width="100" height="35" as="geometry"/>
                 </mxCell>
-                <mxCell id="9" value="Issues&#10;Explorer" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" vertex="1" parent="1">
-                    <mxGeometry x="830" y="340" width="100" height="40" as="geometry"/>
+                <mxCell id="65" value="Jobs&#10;Browser" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" vertex="1" parent="1">
+                    <mxGeometry x="870" y="430" width="100" height="35" as="geometry"/>
                 </mxCell>
-                <mxCell id="10" value="Jobs&#10;Browser" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" vertex="1" parent="1">
-                    <mxGeometry x="950" y="340" width="100" height="40" as="geometry"/>
+                <mxCell id="66" value="Agent&#10;Activity" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+                    <mxGeometry x="990" y="430" width="100" height="35" as="geometry"/>
                 </mxCell>
-                <mxCell id="11" value="Agent&#10;Activity" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" vertex="1" parent="1">
-                    <mxGeometry x="1070" y="340" width="100" height="40" as="geometry"/>
+                <mxCell id="67" value="Shows CockroachDB&#10;Memory Layer" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=9;fontColor=#b85450;fontStyle=2;" vertex="1" parent="1">
+                    <mxGeometry x="1100" y="433" width="120" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="12" value="FastAPI Gateway&#10;(20 REST Endpoints)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=2;fontSize=12;fontStyle=1;" vertex="1" parent="1">
-                    <mxGeometry x="770" y="450" width="320" height="50" as="geometry"/>
+                <mxCell id="68" value="FastAPI Gateway&#10;20 REST Endpoints&#10;(Vercel Serverless + Mangum)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=2;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+                    <mxGeometry x="750" y="520" width="340" height="50" as="geometry"/>
                 </mxCell>
-                <mxCell id="13" value="Strands Agent Layer" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#9673a6;strokeWidth=2;dashed=1;verticalAlign=top;fontStyle=1;fontSize=11;" vertex="1" parent="1">
-                    <mxGeometry x="590" y="540" width="800" height="150" as="geometry"/>
+                <mxCell id="69" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;strokeWidth=2;opacity=20;" vertex="1" parent="1">
+                    <mxGeometry x="410" y="610" width="1020" height="180" as="geometry"/>
                 </mxCell>
-                <mxCell id="14" value="Strands Agent&#10;Orchestration&#10;(Dynamic Tool Selection)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;strokeWidth=2;fontSize=11;fontStyle=1;" vertex="1" parent="1">
-                    <mxGeometry x="810" y="560" width="240" height="60" as="geometry"/>
+                <mxCell id="70" value="Strands Agent Layer — Dynamic Tool Selection (Not Hardcoded)" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=11;fontStyle=1;fontColor=#9673a6;" vertex="1" parent="1">
+                    <mxGeometry x="670" y="612" width="400" height="20" as="geometry"/>
                 </mxCell>
-                <mxCell id="15" value="search_civic_memory&#10;find_related_issues" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=9;" vertex="1" parent="1">
-                    <mxGeometry x="550" y="640" width="140" height="40" as="geometry"/>
+                <mxCell id="71" value="Strands Agent SDK 0.1.5&#10;Agent Orchestration&#10;(Decides which tools to call)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;strokeWidth=2;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+                    <mxGeometry x="750" y="640" width="280" height="55" as="geometry"/>
                 </mxCell>
-                <mxCell id="16" value="create_civic_issue&#10;update_issue&#10;get_issue_context" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=9;" vertex="1" parent="1">
-                    <mxGeometry x="710" y="640" width="130" height="40" as="geometry"/>
+                <mxCell id="72" value="search_civic_memory&#10;find_related_issues" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=9;" vertex="1" parent="1">
+                    <mxGeometry x="430" y="720" width="150" height="40" as="geometry"/>
                 </mxCell>
-                <mxCell id="17" value="record_evidence&#10;record_action&#10;add_timeline_event" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=9;" vertex="1" parent="1">
-                    <mxGeometry x="860" y="640" width="140" height="40" as="geometry"/>
+                <mxCell id="73" value="create_civic_issue&#10;update_issue&#10;get_issue_context" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=9;" vertex="1" parent="1">
+                    <mxGeometry x="600" y="720" width="140" height="40" as="geometry"/>
                 </mxCell>
-                <mxCell id="18" value="find_job_opportunities&#10;record_job_match" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=9;" vertex="1" parent="1">
-                    <mxGeometry x="1020" y="640" width="140" height="40" as="geometry"/>
+                <mxCell id="74" value="record_evidence&#10;record_action&#10;add_timeline_event" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=9;" vertex="1" parent="1">
+                    <mxGeometry x="760" y="720" width="150" height="40" as="geometry"/>
                 </mxCell>
-                <mxCell id="19" value="Amazon Web Services" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#d6b656;strokeWidth=2;dashed=1;verticalAlign=top;fontStyle=1;fontSize=11;" vertex="1" parent="1">
-                    <mxGeometry x="270" y="450" width="220" height="240" as="geometry"/>
+                <mxCell id="75" value="find_job_opportunities&#10;record_job_match" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=9;" vertex="1" parent="1">
+                    <mxGeometry x="930" y="720" width="150" height="40" as="geometry"/>
                 </mxCell>
-                <mxCell id="20" value="Amazon Bedrock&#10;Nova Pro v1&#10;(Reasoning)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;fontStyle=1;" vertex="1" parent="1">
-                    <mxGeometry x="290" y="480" width="180" height="50" as="geometry"/>
+                <mxCell id="76" value="get_issue_timeline" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=9;" vertex="1" parent="1">
+                    <mxGeometry x="1100" y="720" width="130" height="40" as="geometry"/>
                 </mxCell>
-                <mxCell id="21" value="Amazon Bedrock&#10;Titan Embed V2&#10;(1024-dim Vectors)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;fontStyle=1;" vertex="1" parent="1">
-                    <mxGeometry x="290" y="550" width="180" height="50" as="geometry"/>
+                <mxCell id="77" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=2;opacity=20;" vertex="1" parent="1">
+                    <mxGeometry x="90" y="580" width="260" height="210" as="geometry"/>
                 </mxCell>
-                <mxCell id="22" value="Amazon S3&#10;Evidence Storage" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;" vertex="1" parent="1">
-                    <mxGeometry x="290" y="620" width="85" height="50" as="geometry"/>
+                <mxCell id="78" value="Amazon Web Services (us-east-1)" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=11;fontStyle=1;fontColor=#d6b656;" vertex="1" parent="1">
+                    <mxGeometry x="110" y="585" width="220" height="20" as="geometry"/>
                 </mxCell>
-                <mxCell id="23" value="CloudWatch&#10;Monitoring" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;" vertex="1" parent="1">
-                    <mxGeometry x="385" y="620" width="85" height="50" as="geometry"/>
+                <mxCell id="79" value="Amazon Bedrock&#10;Nova Pro v1&#10;(Agent Reasoning)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=2;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+                    <mxGeometry x="110" y="615" width="220" height="50" as="geometry"/>
                 </mxCell>
-                <mxCell id="24" value="CockroachDB Cloud" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#82b366;strokeWidth=2;dashed=1;verticalAlign=top;fontStyle=1;fontSize=11;" vertex="1" parent="1">
-                    <mxGeometry x="570" y="730" width="720" height="220" as="geometry"/>
+                <mxCell id="80" value="Amazon Bedrock&#10;Titan Embed V2&#10;(1024-dim Vectors)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=2;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+                    <mxGeometry x="110" y="680" width="220" height="50" as="geometry"/>
                 </mxCell>
-                <mxCell id="25" value="CockroachDB Cloud&#10;MCP Server&#10;(@cockroachlabs/ccloud-mcp-server)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=2;fontSize=11;fontStyle=1;" vertex="1" parent="1">
-                    <mxGeometry x="600" y="760" width="250" height="60" as="geometry"/>
+                <mxCell id="81" value="S3 + CloudWatch" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=9;" vertex="1" parent="1">
+                    <mxGeometry x="110" y="745" width="220" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="26" value="CockroachDB Agent Skills&#10;• transactional_upsert&#10;• vector_similarity_search&#10;• multi_table_transaction&#10;• store_with_embedding" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=9;align=left;spacingLeft=10;" vertex="1" parent="1">
-                    <mxGeometry x="890" y="755" width="200" height="80" as="geometry"/>
+                <mxCell id="82" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=2;opacity=15;" vertex="1" parent="1">
+                    <mxGeometry x="410" y="830" width="1020" height="260" as="geometry"/>
                 </mxCell>
-                <mxCell id="27" value="CockroachDB Cloud v26.2&#10;Distributed Database&#10;(13 Tables • Serializable Isolation)" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=10;fillColor=#f8cecc;strokeColor=#b85450;strokeWidth=2;fontSize=11;fontStyle=1;" vertex="1" parent="1">
-                    <mxGeometry x="650" y="855" width="280" height="80" as="geometry"/>
+                <mxCell id="83" value="CockroachDB Cloud (us-east-1) — Persistent Civic Memory Layer" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=12;fontStyle=1;fontColor=#82b366;" vertex="1" parent="1">
+                    <mxGeometry x="610" y="835" width="440" height="20" as="geometry"/>
                 </mxCell>
-                <mxCell id="28" value="C-SPANN Distributed&#10;Vector Indexes&#10;(5 HNSW Indexes • 1024-dim)" style="shape=hexagon;perimeter=hexagonPerimeter2;whiteSpace=wrap;html=1;fixedSize=1;fillColor=#ffe6cc;strokeColor=#d79b00;strokeWidth=2;fontSize=10;fontStyle=1;" vertex="1" parent="1">
-                    <mxGeometry x="970" y="865" width="220" height="60" as="geometry"/>
+                <mxCell id="84" value="CockroachDB Cloud&#10;MCP Server&#10;(Official @cockroachlabs/ccloud-mcp-server)&#10;Agent-to-Database Bridge" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=2;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+                    <mxGeometry x="430" y="870" width="280" height="70" as="geometry"/>
                 </mxCell>
-                <mxCell id="29" value="ccloud CLI&#10;Environment Management" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;strokeWidth=1;fontSize=10;fontStyle=2;" vertex="1" parent="1">
-                    <mxGeometry x="270" y="830" width="160" height="50" as="geometry"/>
+                <mxCell id="85" value="CockroachDB Agent Skills&#10;&#10;• transactional_upsert&#10;• vector_similarity_search&#10;• multi_table_transaction&#10;• store_with_embedding" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=1;fontSize=9;align=left;spacingLeft=10;" vertex="1" parent="1">
+                    <mxGeometry x="750" y="865" width="210" height="90" as="geometry"/>
                 </mxCell>
-                <mxCell id="30" style="edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="4" target="5">
+                <mxCell id="86" value="CockroachDB Cloud v26.2&#10;13 Tables&#10;Serializable Isolation" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=10;fillColor=#f8cecc;strokeColor=#b85450;strokeWidth=2;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+                    <mxGeometry x="490" y="980" width="250" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="87" value="C-SPANN Distributed&#10;Vector Indexes&#10;5 HNSW Indexes (1024-dim)&#10;issues • reports • evidence&#10;responses • job_opportunities" style="shape=hexagon;perimeter=hexagonPerimeter2;whiteSpace=wrap;html=1;fixedSize=1;fillColor=#ffe6cc;strokeColor=#d79b00;strokeWidth=2;fontSize=9;fontStyle=1;" vertex="1" parent="1">
+                    <mxGeometry x="800" y="980" width="250" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="88" value="Tables: users • issues • reports&#10;evidence • issue_timeline • actions&#10;responses • agent_actions • conversations&#10;messages • job_opportunities • job_matches" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=9;fontColor=#666666;" vertex="1" parent="1">
+                    <mxGeometry x="1090" y="990" width="280" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="89" value="ccloud CLI&#10;Cluster Management" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=9;fontStyle=2;" vertex="1" parent="1">
+                    <mxGeometry x="1010" y="870" width="130" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="90" style="edgeStyle=orthogonalEdgeStyle;strokeWidth=2;" edge="1" parent="1" source="59" target="60">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="31" style="edgeStyle=orthogonalEdgeStyle;strokeWidth=2;" edge="1" parent="1" source="5" target="6">
+                <mxCell id="91" value="REST API" style="edgeStyle=orthogonalEdgeStyle;strokeWidth=2;fontSize=9;" edge="1" parent="1" source="60" target="68">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="92" style="edgeStyle=orthogonalEdgeStyle;strokeWidth=2;" edge="1" parent="1" source="68" target="71">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="93" value="Reasoning" style="edgeStyle=orthogonalEdgeStyle;strokeWidth=2;strokeColor=#d6b656;fontSize=9;" edge="1" parent="1" source="71" target="79">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="94" value="Embeddings" style="edgeStyle=orthogonalEdgeStyle;strokeWidth=1;strokeColor=#d6b656;fontSize=9;" edge="1" parent="1" source="72" target="80">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="95" value="MCP Protocol" style="edgeStyle=orthogonalEdgeStyle;strokeWidth=2;strokeColor=#82b366;fontSize=9;fontStyle=1;" edge="1" parent="1" source="73" target="84">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="96" value="Skills" style="edgeStyle=orthogonalEdgeStyle;strokeWidth=2;strokeColor=#82b366;fontSize=9;" edge="1" parent="1" source="75" target="85">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="97" value="SQL" style="edgeStyle=orthogonalEdgeStyle;strokeWidth=2;strokeColor=#b85450;fontSize=9;fontStyle=1;" edge="1" parent="1" source="84" target="86">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="98" value="SQL" style="edgeStyle=orthogonalEdgeStyle;strokeWidth=2;strokeColor=#b85450;fontSize=9;" edge="1" parent="1" source="85" target="86">
                     <mxGeometry relative="1" as="geometry">
                         <Array as="points">
-                            <mxPoint x="980" y="290"/>
-                            <mxPoint x="930" y="290"/>
+                            <mxPoint x="720" y="910"/>
                         </Array>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="32" value="REST" style="edgeStyle=orthogonalEdgeStyle;strokeWidth=2;fontSize=9;" edge="1" parent="1" source="6" target="12">
+                <mxCell id="99" value="ANN Search" style="edgeStyle=orthogonalEdgeStyle;strokeWidth=2;strokeColor=#d79b00;fontSize=9;fontStyle=1;" edge="1" parent="1" source="86" target="87">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="33" style="edgeStyle=orthogonalEdgeStyle;strokeWidth=2;" edge="1" parent="1" source="12" target="14">
+                <mxCell id="100" style="edgeStyle=orthogonalEdgeStyle;strokeWidth=1;strokeColor=#666666;dashed=1;fontSize=9;" edge="1" parent="1" source="89" target="86">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="34" value="Reasoning" style="edgeStyle=orthogonalEdgeStyle;strokeWidth=2;strokeColor=#d6b656;fontSize=9;" edge="1" parent="1" source="14" target="20">
-                    <mxGeometry relative="1" as="geometry">
-                        <Array as="points">
-                            <mxPoint x="860" y="520"/>
-                        </Array>
-                    </mxGeometry>
-                </mxCell>
-                <mxCell id="35" value="Embeddings" style="edgeStyle=orthogonalEdgeStyle;strokeWidth=1;strokeColor=#d6b656;fontSize=9;" edge="1" parent="1" source="14" target="21">
-                    <mxGeometry relative="1" as="geometry">
-                        <Array as="points">
-                            <mxPoint x="640" y="590"/>
-                            <mxPoint x="640" y="570"/>
-                        </Array>
-                    </mxGeometry>
-                </mxCell>
-                <mxCell id="36" style="edgeStyle=orthogonalEdgeStyle;strokeWidth=1;strokeColor=#9673a6;" edge="1" parent="1" source="14" target="15">
-                    <mxGeometry relative="1" as="geometry">
-                        <Array as="points">
-                            <mxPoint x="620" y="600"/>
-                        </Array>
-                    </mxGeometry>
-                </mxCell>
-                <mxCell id="37" style="edgeStyle=orthogonalEdgeStyle;strokeWidth=1;strokeColor=#9673a6;" edge="1" parent="1" source="14" target="16">
+                <mxCell id="101" style="edgeStyle=orthogonalEdgeStyle;strokeWidth=1;strokeColor=#9673a6;" edge="1" parent="1" source="71" target="72">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="38" style="edgeStyle=orthogonalEdgeStyle;strokeWidth=1;strokeColor=#9673a6;" edge="1" parent="1" source="14" target="17">
+                <mxCell id="102" style="edgeStyle=orthogonalEdgeStyle;strokeWidth=1;strokeColor=#9673a6;" edge="1" parent="1" source="71" target="73">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="39" style="edgeStyle=orthogonalEdgeStyle;strokeWidth=1;strokeColor=#9673a6;" edge="1" parent="1" source="14" target="18">
+                <mxCell id="103" style="edgeStyle=orthogonalEdgeStyle;strokeWidth=1;strokeColor=#9673a6;" edge="1" parent="1" source="71" target="74">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="40" value="MCP Protocol" style="edgeStyle=orthogonalEdgeStyle;strokeWidth=2;strokeColor=#82b366;fontSize=9;fontStyle=1;" edge="1" parent="1" source="16" target="25">
+                <mxCell id="104" style="edgeStyle=orthogonalEdgeStyle;strokeWidth=1;strokeColor=#9673a6;" edge="1" parent="1" source="71" target="75">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="41" value="Skills" style="edgeStyle=orthogonalEdgeStyle;strokeWidth=2;strokeColor=#82b366;fontSize=9;" edge="1" parent="1" source="18" target="26">
+                <mxCell id="105" style="edgeStyle=orthogonalEdgeStyle;strokeWidth=1;strokeColor=#9673a6;" edge="1" parent="1" source="71" target="76">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="42" value="SQL" style="edgeStyle=orthogonalEdgeStyle;strokeWidth=2;strokeColor=#b85450;fontSize=9;fontStyle=1;" edge="1" parent="1" source="25" target="27">
-                    <mxGeometry relative="1" as="geometry"/>
+                <mxCell id="106" value="Legend" style="text;html=1;align=left;verticalAlign=top;strokeColor=#333333;fillColor=#ffffff;fontSize=10;fontStyle=1;rounded=1;spacing=8;" vertex="1" parent="1">
+                    <mxGeometry x="90" y="840" width="260" height="210" as="geometry"/>
                 </mxCell>
-                <mxCell id="43" value="SQL" style="edgeStyle=orthogonalEdgeStyle;strokeWidth=2;strokeColor=#b85450;fontSize=9;" edge="1" parent="1" source="26" target="27">
-                    <mxGeometry relative="1" as="geometry"/>
+                <mxCell id="107" value="Frontend (React + TS)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=9;" vertex="1" parent="1">
+                    <mxGeometry x="110" y="870" width="130" height="22" as="geometry"/>
                 </mxCell>
-                <mxCell id="44" value="ANN Search" style="edgeStyle=orthogonalEdgeStyle;strokeWidth=2;strokeColor=#d79b00;fontSize=9;fontStyle=1;" edge="1" parent="1" source="27" target="28">
-                    <mxGeometry relative="1" as="geometry"/>
+                <mxCell id="108" value="API (FastAPI)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=9;" vertex="1" parent="1">
+                    <mxGeometry x="110" y="900" width="130" height="22" as="geometry"/>
                 </mxCell>
-                <mxCell id="45" value="Cluster Mgmt" style="edgeStyle=orthogonalEdgeStyle;strokeWidth=1;strokeColor=#666666;dashed=1;fontSize=9;" edge="1" parent="1" source="29" target="27">
-                    <mxGeometry relative="1" as="geometry"/>
+                <mxCell id="109" value="Agent (Strands SDK)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=9;" vertex="1" parent="1">
+                    <mxGeometry x="110" y="930" width="130" height="22" as="geometry"/>
                 </mxCell>
-                <mxCell id="46" value="Technology Legend" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#333333;strokeWidth=1;verticalAlign=top;fontStyle=1;fontSize=10;" vertex="1" parent="1">
-                    <mxGeometry x="1370" y="190" width="200" height="280" as="geometry"/>
+                <mxCell id="110" value="AWS (Bedrock)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=9;" vertex="1" parent="1">
+                    <mxGeometry x="110" y="960" width="130" height="22" as="geometry"/>
                 </mxCell>
-                <mxCell id="47" value="Frontend (React)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=9;" vertex="1" parent="1">
-                    <mxGeometry x="1390" y="220" width="160" height="25" as="geometry"/>
+                <mxCell id="111" value="CockroachDB Cloud" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=9;" vertex="1" parent="1">
+                    <mxGeometry x="110" y="990" width="130" height="22" as="geometry"/>
                 </mxCell>
-                <mxCell id="48" value="API (FastAPI)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=9;" vertex="1" parent="1">
-                    <mxGeometry x="1390" y="255" width="160" height="25" as="geometry"/>
+                <mxCell id="112" value="Vector Index (C-SPANN)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=9;" vertex="1" parent="1">
+                    <mxGeometry x="110" y="1020" width="130" height="22" as="geometry"/>
                 </mxCell>
-                <mxCell id="49" value="Agent (Strands SDK)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=9;" vertex="1" parent="1">
-                    <mxGeometry x="1390" y="290" width="160" height="25" as="geometry"/>
-                </mxCell>
-                <mxCell id="50" value="AWS (Bedrock)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=9;" vertex="1" parent="1">
-                    <mxGeometry x="1390" y="325" width="160" height="25" as="geometry"/>
-                </mxCell>
-                <mxCell id="51" value="CockroachDB Cloud" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=9;" vertex="1" parent="1">
-                    <mxGeometry x="1390" y="360" width="160" height="25" as="geometry"/>
-                </mxCell>
-                <mxCell id="52" value="Vector Indexes (C-SPANN)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=9;" vertex="1" parent="1">
-                    <mxGeometry x="1390" y="395" width="160" height="25" as="geometry"/>
-                </mxCell>
-                <mxCell id="53" value="Operations (ccloud)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=9;" vertex="1" parent="1">
-                    <mxGeometry x="1390" y="430" width="160" height="25" as="geometry"/>
-                </mxCell>
-                <mxCell id="54" value="① Citizen reports concern" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=9;fontColor=#666666;" vertex="1" parent="1">
-                    <mxGeometry x="1400" y="510" width="150" height="20" as="geometry"/>
-                </mxCell>
-                <mxCell id="55" value="② Agent reasons (Nova Pro)" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=9;fontColor=#666666;" vertex="1" parent="1">
-                    <mxGeometry x="1400" y="530" width="155" height="20" as="geometry"/>
-                </mxCell>
-                <mxCell id="56" value="③ Tools search/write via MCP" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=9;fontColor=#666666;" vertex="1" parent="1">
-                    <mxGeometry x="1400" y="550" width="170" height="20" as="geometry"/>
-                </mxCell>
-                <mxCell id="57" value="④ Vector search finds related" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=9;fontColor=#666666;" vertex="1" parent="1">
-                    <mxGeometry x="1400" y="570" width="170" height="20" as="geometry"/>
-                </mxCell>
-                <mxCell id="58" value="⑤ State persisted in CockroachDB" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=9;fontColor=#666666;" vertex="1" parent="1">
-                    <mxGeometry x="1400" y="590" width="185" height="20" as="geometry"/>
-                </mxCell>
-                <mxCell id="59" value="⑥ Response returned to citizen" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=9;fontColor=#666666;" vertex="1" parent="1">
-                    <mxGeometry x="1400" y="610" width="175" height="20" as="geometry"/>
+                <mxCell id="113" value="Data Flow:&#10;1. Citizen reports concern&#10;2. Strands Agent reasons (Nova Pro)&#10;3. Tools search/write via MCP&#10;4. C-SPANN vector search finds related&#10;5. State persisted in CockroachDB&#10;6. Agent Activity logs every operation&#10;7. Response returned to citizen" style="text;html=1;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontSize=9;fontColor=#333333;" vertex="1" parent="1">
+                    <mxGeometry x="1380" y="400" width="240" height="130" as="geometry"/>
                 </mxCell>
             </root>
         </mxGraphModel>
     </diagram>
-    <diagram id="cjp-data-flow" name="Agent Data Flow">
-        <mxGraphModel dx="1422" dy="762" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="900" math="0" shadow="0">
+    <diagram id="cjp-memory" name="CockroachDB Memory Layer">
+        <mxGraphModel dx="1400" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="900" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
-                <!-- Title -->
-                <mxCell id="df-title" value="CJP Agent Data Flow" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=16;fontStyle=1;" vertex="1" parent="1">
-                    <mxGeometry x="600" y="20" width="200" height="30" as="geometry"/>
+                <mxCell id="t1" value="CockroachDB Memory Layer — How It Works" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=18;fontStyle=1;" vertex="1" parent="1">
+                    <mxGeometry x="450" y="30" width="500" height="30" as="geometry"/>
                 </mxCell>
-                <!-- Input -->
-                <mxCell id="df-input" value="Citizen Report&#10;&quot;There aren't enough&#10;technology jobs for&#10;graduates in my area.&quot;" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;size=15;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;align=center;" vertex="1" parent="1">
-                    <mxGeometry x="60" y="100" width="180" height="90" as="geometry"/>
+                <mxCell id="s1" value="Session 1: Citizen Reports" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=14;fontStyle=1;fontColor=#0074c5;" vertex="1" parent="1">
+                    <mxGeometry x="100" y="80" width="250" height="25" as="geometry"/>
                 </mxCell>
-                <!-- Agent -->
-                <mxCell id="df-agent" value="Strands Agent&#10;(Nova Pro)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;strokeWidth=2;fontSize=12;fontStyle=1;" vertex="1" parent="1">
-                    <mxGeometry x="340" y="110" width="150" height="80" as="geometry"/>
+                <mxCell id="m1" value="&quot;There aren't enough&#10;technology jobs for&#10;graduates in my area&quot;" style="shape=note;whiteSpace=wrap;html=1;size=14;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" vertex="1" parent="1">
+                    <mxGeometry x="100" y="120" width="180" height="70" as="geometry"/>
                 </mxCell>
-                <!-- Decision 1 -->
-                <mxCell id="df-dec1" value="Search&#10;Memory?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;" vertex="1" parent="1">
-                    <mxGeometry x="570" y="110" width="100" height="80" as="geometry"/>
+                <mxCell id="a1" value="Agent Tool Calls&#10;(logged to agent_actions)" style="text;html=1;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+                    <mxGeometry x="100" y="210" width="200" height="25" as="geometry"/>
                 </mxCell>
-                <!-- Vector Search -->
-                <mxCell id="df-vector" value="CockroachDB&#10;Vector Search&#10;(C-SPANN)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;strokeWidth=2;fontSize=10;fontStyle=1;" vertex="1" parent="1">
-                    <mxGeometry x="740" y="70" width="150" height="60" as="geometry"/>
+                <mxCell id="t1a" value="1. search_civic_memory" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;align=left;spacingLeft=8;" vertex="1" parent="1">
+                    <mxGeometry x="100" y="240" width="250" height="30" as="geometry"/>
                 </mxCell>
-                <!-- Results -->
-                <mxCell id="df-results" value="Related Issues&#10;+ Reports Found" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;" vertex="1" parent="1">
-                    <mxGeometry x="960" y="80" width="130" height="50" as="geometry"/>
+                <mxCell id="t1b" value="2. create_civic_issue + embedding" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;align=left;spacingLeft=8;" vertex="1" parent="1">
+                    <mxGeometry x="100" y="280" width="250" height="30" as="geometry"/>
                 </mxCell>
-                <!-- Decision 2 -->
-                <mxCell id="df-dec2" value="New Issue&#10;or Existing?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;" vertex="1" parent="1">
-                    <mxGeometry x="570" y="250" width="110" height="80" as="geometry"/>
+                <mxCell id="t1c" value="3. find_job_opportunities (vector)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;align=left;spacingLeft=8;" vertex="1" parent="1">
+                    <mxGeometry x="100" y="320" width="250" height="30" as="geometry"/>
                 </mxCell>
-                <!-- Create Issue -->
-                <mxCell id="df-create" value="Create New&#10;Civic Issue" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;fontStyle=1;" vertex="1" parent="1">
-                    <mxGeometry x="740" y="230" width="120" height="50" as="geometry"/>
+                <mxCell id="t1d" value="4. record_job_match (x6)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;align=left;spacingLeft=8;" vertex="1" parent="1">
+                    <mxGeometry x="100" y="360" width="250" height="30" as="geometry"/>
                 </mxCell>
-                <!-- Link Report -->
-                <mxCell id="df-link" value="Link to&#10;Existing Issue" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;" vertex="1" parent="1">
-                    <mxGeometry x="740" y="300" width="120" height="50" as="geometry"/>
+                <mxCell id="t1e" value="5. add_timeline_event" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;align=left;spacingLeft=8;" vertex="1" parent="1">
+                    <mxGeometry x="100" y="400" width="250" height="30" as="geometry"/>
                 </mxCell>
-                <!-- Decision 3 -->
-                <mxCell id="df-dec3" value="Employment&#10;Issue?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;" vertex="1" parent="1">
-                    <mxGeometry x="570" y="400" width="110" height="80" as="geometry"/>
+                <mxCell id="db1" value="CockroachDB State After Session 1:&#10;&#10;issues: 1 new issue created&#10;issue_timeline: 3 events&#10;job_matches: 6 matches recorded&#10;agent_actions: 10 entries logged&#10;embeddings: issue + report vectors stored" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=12;fillColor=#f8cecc;strokeColor=#b85450;fontSize=9;align=left;spacingLeft=10;verticalAlign=top;spacingTop=15;" vertex="1" parent="1">
+                    <mxGeometry x="100" y="460" width="280" height="130" as="geometry"/>
                 </mxCell>
-                <!-- Job Search -->
-                <mxCell id="df-jobsearch" value="Semantic Job&#10;Matching&#10;(Vector Index)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;strokeWidth=2;fontSize=10;fontStyle=1;" vertex="1" parent="1">
-                    <mxGeometry x="740" y="400" width="140" height="60" as="geometry"/>
+                <mxCell id="arrow1" value="PERSISTS" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=10;fontStyle=1;fontColor=#b85450;" vertex="1" parent="1">
+                    <mxGeometry x="185" y="437" width="80" height="20" as="geometry"/>
                 </mxCell>
-                <!-- Job Results -->
-                <mxCell id="df-jobs" value="6 Relevant Jobs&#10;with Apply Links" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;" vertex="1" parent="1">
-                    <mxGeometry x="950" y="410" width="130" height="50" as="geometry"/>
+                <mxCell id="s2" value="Session 2: Next Day (New Session)" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=14;fontStyle=1;fontColor=#0074c5;" vertex="1" parent="1">
+                    <mxGeometry x="500" y="80" width="300" height="25" as="geometry"/>
                 </mxCell>
-                <!-- Timeline -->
-                <mxCell id="df-timeline" value="Update&#10;Accountability&#10;Timeline" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;" vertex="1" parent="1">
-                    <mxGeometry x="570" y="540" width="120" height="50" as="geometry"/>
+                <mxCell id="m2" value="&quot;Continue where&#10;we left off&quot;" style="shape=note;whiteSpace=wrap;html=1;size=14;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" vertex="1" parent="1">
+                    <mxGeometry x="570" y="120" width="150" height="55" as="geometry"/>
                 </mxCell>
-                <!-- Persist -->
-                <mxCell id="df-persist" value="CockroachDB&#10;State Persisted&#10;(Cross-Session Memory)" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=8;fillColor=#f8cecc;strokeColor=#b85450;strokeWidth=2;fontSize=10;fontStyle=1;" vertex="1" parent="1">
-                    <mxGeometry x="780" y="530" width="180" height="70" as="geometry"/>
+                <mxCell id="a2" value="Agent retrieves from CockroachDB:" style="text;html=1;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+                    <mxGeometry x="500" y="200" width="250" height="25" as="geometry"/>
                 </mxCell>
-                <!-- Response -->
-                <mxCell id="df-response" value="Response to Citizen&#10;with Issue Status +&#10;Job Recommendations" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;size=15;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" vertex="1" parent="1">
-                    <mxGeometry x="340" y="620" width="180" height="70" as="geometry"/>
+                <mxCell id="r1" value="get_issue_context → Full issue state" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;align=left;spacingLeft=8;" vertex="1" parent="1">
+                    <mxGeometry x="500" y="230" width="280" height="30" as="geometry"/>
                 </mxCell>
-                <!-- Edges -->
-                <mxCell id="dfe1" style="strokeWidth=2;" edge="1" source="df-input" target="df-agent" parent="1"/>
-                <mxCell id="dfe2" style="strokeWidth=2;" edge="1" source="df-agent" target="df-dec1" parent="1"/>
-                <mxCell id="dfe3" value="Yes" style="strokeWidth=2;fontSize=9;" edge="1" source="df-dec1" target="df-vector" parent="1"/>
-                <mxCell id="dfe4" style="strokeWidth=2;" edge="1" source="df-vector" target="df-results" parent="1"/>
-                <mxCell id="dfe5" style="strokeWidth=2;" edge="1" source="df-dec1" target="df-dec2" parent="1"/>
-                <mxCell id="dfe6" value="New" style="strokeWidth=2;fontSize=9;" edge="1" source="df-dec2" target="df-create" parent="1"/>
-                <mxCell id="dfe7" value="Existing" style="strokeWidth=2;fontSize=9;" edge="1" source="df-dec2" target="df-link" parent="1"/>
-                <mxCell id="dfe8" style="strokeWidth=2;" edge="1" source="df-dec2" target="df-dec3" parent="1"/>
-                <mxCell id="dfe9" value="Yes" style="strokeWidth=2;fontSize=9;" edge="1" source="df-dec3" target="df-jobsearch" parent="1"/>
-                <mxCell id="dfe10" style="strokeWidth=2;" edge="1" source="df-jobsearch" target="df-jobs" parent="1"/>
-                <mxCell id="dfe11" style="strokeWidth=2;" edge="1" source="df-dec3" target="df-timeline" parent="1"/>
-                <mxCell id="dfe12" style="strokeWidth=2;" edge="1" source="df-timeline" target="df-persist" parent="1"/>
-                <mxCell id="dfe13" style="strokeWidth=2;" edge="1" source="df-create" target="df-persist" parent="1"/>
-                <mxCell id="dfe14" style="strokeWidth=2;" edge="1" source="df-persist" target="df-response" parent="1"/>
+                <mxCell id="r2" value="get_issue_timeline → All events" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;align=left;spacingLeft=8;" vertex="1" parent="1">
+                    <mxGeometry x="500" y="270" width="280" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="r3" value="Reports, evidence, job matches → All linked" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;align=left;spacingLeft=8;" vertex="1" parent="1">
+                    <mxGeometry x="500" y="310" width="280" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="r4" value="agent_actions → Previous tool history" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;align=left;spacingLeft=8;" vertex="1" parent="1">
+                    <mxGeometry x="500" y="350" width="280" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="resp" value="Agent Response:&#10;&quot;I found your employment issue from yesterday.&#10;Status: open. 6 job matches found.&#10;Here's what happened since...&quot;" style="shape=note;whiteSpace=wrap;html=1;size=14;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=9;align=left;spacingLeft=8;" vertex="1" parent="1">
+                    <mxGeometry x="500" y="410" width="280" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="proof" value="PROOF: CockroachDB Memory Layer Works&#10;&#10;The agent NEVER loses context.&#10;All state persists in CockroachDB.&#10;Every tool call is logged and visible.&#10;&#10;See: /activity endpoint&#10;See: /api/agent/actions" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;strokeWidth=2;fontSize=10;fontStyle=1;align=left;spacingLeft=10;verticalAlign=top;spacingTop=10;" vertex="1" parent="1">
+                    <mxGeometry x="500" y="520" width="280" height="120" as="geometry"/>
+                </mxCell>
+                <mxCell id="activity" value="Agent Activity UI Shows:&#10;&#10;search_civic_memory → Vector Search&#10;create_civic_issue → CockroachDB MCP&#10;find_job_opportunities → Vector Search&#10;record_job_match → CockroachDB MCP&#10;get_issue_context → CockroachDB MCP&#10;get_issue_timeline → CockroachDB MCP" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=9;align=left;spacingLeft=10;verticalAlign=top;spacingTop=10;" vertex="1" parent="1">
+                    <mxGeometry x="900" y="120" width="280" height="140" as="geometry"/>
+                </mxCell>
+                <mxCell id="key" value="KEY INSIGHT:&#10;CockroachDB is NOT just a database.&#10;It IS the agent's persistent memory.&#10;&#10;Strands = Brain&#10;MCP = Bridge&#10;CockroachDB = Memory&#10;Vector Index = Understanding" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#333333;fontSize=10;align=left;spacingLeft=10;verticalAlign=top;spacingTop=10;fontStyle=1;" vertex="1" parent="1">
+                    <mxGeometry x="900" y="300" width="280" height="140" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+    <diagram id="cjp-flow" name="Agent Decision Flow">
+        <mxGraphModel dx="1400" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="900" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="ft" value="CJP Agent Decision Flow" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=18;fontStyle=1;" vertex="1" parent="1">
+                    <mxGeometry x="550" y="20" width="300" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="f1" value="Citizen Message" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+                    <mxGeometry x="600" y="70" width="200" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="f2" value="Strands Agent&#10;(Nova Pro reasoning)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;strokeWidth=2;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+                    <mxGeometry x="600" y="140" width="200" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="f3" value="search_civic_memory&#10;(Vector Search)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;" vertex="1" parent="1">
+                    <mxGeometry x="600" y="240" width="200" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="f4" value="Related issue&#10;found?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;" vertex="1" parent="1">
+                    <mxGeometry x="640" y="310" width="120" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="f5" value="Link report to&#10;existing issue" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;" vertex="1" parent="1">
+                    <mxGeometry x="440" y="320" width="140" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="f6" value="create_civic_issue&#10;+ generate embedding" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;" vertex="1" parent="1">
+                    <mxGeometry x="820" y="320" width="160" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="f7" value="Employment&#10;issue?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;" vertex="1" parent="1">
+                    <mxGeometry x="640" y="420" width="120" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="f8" value="find_job_opportunities&#10;(C-SPANN Vector Search)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+                    <mxGeometry x="820" y="430" width="200" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="f9" value="record_job_match&#10;+ add_timeline_event" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;" vertex="1" parent="1">
+                    <mxGeometry x="820" y="500" width="200" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="f10" value="All state persisted&#10;to CockroachDB" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=8;fillColor=#f8cecc;strokeColor=#b85450;strokeWidth=2;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+                    <mxGeometry x="600" y="540" width="200" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="f11" value="Response + Jobs&#10;to Citizen" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+                    <mxGeometry x="600" y="640" width="200" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="f12" value="Every step logged&#10;to agent_actions table&#10;(visible at /activity)" style="text;html=1;align=center;verticalAlign=middle;strokeColor=#b85450;fillColor=#f8cecc;fontSize=9;fontStyle=2;rounded=1;spacing=4;" vertex="1" parent="1">
+                    <mxGeometry x="380" y="560" width="160" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="fe1" style="strokeWidth=2;" edge="1" source="f1" target="f2" parent="1"/>
+                <mxCell id="fe2" value="Always first" style="strokeWidth=2;fontSize=9;" edge="1" source="f2" target="f3" parent="1"/>
+                <mxCell id="fe3" style="strokeWidth=2;" edge="1" source="f3" target="f4" parent="1"/>
+                <mxCell id="fe4" value="Yes" style="strokeWidth=2;fontSize=9;" edge="1" source="f4" target="f5" parent="1"/>
+                <mxCell id="fe5" value="No" style="strokeWidth=2;fontSize=9;" edge="1" source="f4" target="f6" parent="1"/>
+                <mxCell id="fe6" style="strokeWidth=2;" edge="1" source="f4" target="f7" parent="1"/>
+                <mxCell id="fe7" value="Yes" style="strokeWidth=2;fontSize=9;" edge="1" source="f7" target="f8" parent="1"/>
+                <mxCell id="fe8" style="strokeWidth=2;" edge="1" source="f8" target="f9" parent="1"/>
+                <mxCell id="fe9" style="strokeWidth=2;" edge="1" source="f9" target="f10" parent="1"/>
+                <mxCell id="fe10" style="strokeWidth=2;" edge="1" source="f6" target="f10" parent="1"/>
+                <mxCell id="fe11" style="strokeWidth=2;" edge="1" source="f5" target="f10" parent="1"/>
+                <mxCell id="fe12" style="strokeWidth=2;" edge="1" source="f10" target="f11" parent="1"/>
+                <mxCell id="fe13" style="strokeWidth=1;dashed=1;strokeColor=#b85450;" edge="1" source="f12" target="f10" parent="1"/>
             </root>
         </mxGraphModel>
     </diagram>
