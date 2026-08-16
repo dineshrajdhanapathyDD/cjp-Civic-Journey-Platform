@@ -32,12 +32,27 @@ CJP transforms fragmented citizen voices into accountable civic action through a
 
 **The agent retrieves from CockroachDB:** The full issue context, timeline, related reports, job matches, and all previous actions — proving persistent cross-session memory.
 
+**Live proof — Agent Activity log shows every CockroachDB interaction:**
+
+```
+tool_name              | action
+-----------------------|------------------------------------------------
+search_civic_memory    | Searching civic memory: not enough cloud jobs...
+create_civic_issue     | Creating issue: Lack of cloud computing jobs...
+find_job_opportunities | Searching jobs: cloud computing jobs for graduates
+record_job_match       | Recording job match (×6)
+civic_agent            | process_message
+```
+
+Visible at: https://cjp-fawn.vercel.app/activity
+
 **Key features:**
 - 11 agent tools dynamically selected (not hardcoded sequences)
-- Semantic search across issues, reports, evidence, and jobs
+- Semantic search across issues, reports, evidence, and jobs via CockroachDB C-SPANN vector indexes
 - Full accountability timeline for every civic issue
 - Job resolution for employment-related issues with verified listings
 - Agent Activity panel showing every MCP operation and vector search in real-time
+- Persistent cross-session memory proven working
 
 ---
 
@@ -106,17 +121,20 @@ Not a chatbot with a database. The agent retrieves full context from CockroachDB
 - ccloud CLI for cluster lifecycle management
 - Agent Skills for reusable database operations
 
-**3. Semantic Issue Deduplication**
+**3. CockroachDB Memory Layer Fully Visible**
+Every single tool call the agent makes is logged to CockroachDB and displayed in the Agent Activity UI. You can see `search_civic_memory`, `create_civic_issue`, `find_job_opportunities`, and `record_job_match` all appear with descriptions showing what CockroachDB operation was performed.
+
+**4. Semantic Issue Deduplication**
 "No software careers", "IT opportunities lacking", "engineers leaving" — all connect to the same underlying issue through vector similarity, even though they share zero keywords.
 
-**4. End-to-End Job Resolution**
-The platform doesn't just identify problems — it helps solve them. Employment issues trigger semantic job matching with verified listings, real companies, and actual application links.
+**5. End-to-End Job Resolution**
+The platform doesn't just identify problems — it helps solve them. Employment issues trigger semantic job matching with verified listings, real companies, and actual application links. In testing, the agent found 6 relevant jobs from our seeded data.
 
-**5. Agent Activity Transparency**
+**6. Agent Activity Transparency**
 Every MCP operation, every vector search, every database write is visible in the Agent Activity panel. No black box — citizens can see exactly what the AI is doing with their data.
 
-**6. Live Production Deployment**
-Not a demo on localhost. The full system runs at https://cjp-fawn.vercel.app with real CockroachDB Cloud connectivity, real Bedrock inference, and real vector search.
+**7. Live Production Deployment**
+Not a demo on localhost. The full system runs at https://cjp-fawn.vercel.app with real CockroachDB Cloud connectivity, real Bedrock inference, and real vector search — verified working with `/api/health` returning `{"status": "healthy", "database": "connected"}`.
 
 ---
 

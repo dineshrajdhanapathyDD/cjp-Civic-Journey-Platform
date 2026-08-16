@@ -42,6 +42,22 @@ Built for the **CockroachDB x AWS Hackathon**.
 | **Strands Agents SDK** | Dynamic tool selection with 11 agent tools | Agent reasoning visible |
 | **Amazon Bedrock** | Nova Pro (reasoning) + Titan Embed V2 (vectors) | Agent responses + search |
 
+### CockroachDB Memory Layer — Proven Working
+
+Every agent tool interaction is logged to CockroachDB and visible at `/activity`:
+
+```
+tool_name              | action
+-----------------------|------------------------------------------------
+search_civic_memory    | Searching civic memory: not enough cloud jobs...
+create_civic_issue     | Creating issue: Lack of cloud computing jobs...
+find_job_opportunities | Searching jobs: cloud computing jobs for graduates
+record_job_match       | Recording job match (×6)
+civic_agent            | process_message
+```
+
+**Persistent memory proof**: Start a new session and say "Continue where we left off" — the agent retrieves full issue context, timeline, and job matches from CockroachDB.
+
 ---
 
 ## Architecture
