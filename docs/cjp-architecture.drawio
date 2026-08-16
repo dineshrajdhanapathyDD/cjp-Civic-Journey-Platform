@@ -6,8 +6,8 @@
         <mxCell id="1" parent="0" />
 
         <!-- Title -->
-        <mxCell id="title" value="CJP — Civic Journey Platform&#xa;From Citizen Voice to Accountable Action" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=18;fontStyle=1;fontColor=#1a1a2e;" vertex="1" parent="1">
-          <mxGeometry x="500" y="20" width="600" height="50" as="geometry" />
+        <mxCell id="title" value="CJP — Civic Journey Platform&#xa;From Citizen Voice to Accountable Action&#xa;Live: https://cjp-fawn.vercel.app" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=18;fontStyle=1;fontColor=#1a1a2e;" vertex="1" parent="1">
+          <mxGeometry x="500" y="20" width="600" height="60" as="geometry" />
         </mxCell>
 
         <!-- ==================== USER LAYER ==================== -->
