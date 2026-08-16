@@ -52,11 +52,24 @@ tool_name              | action
 search_civic_memory    | Searching civic memory: not enough cloud jobs...
 create_civic_issue     | Creating issue: Lack of cloud computing jobs...
 find_job_opportunities | Searching jobs: cloud computing jobs for graduates
-record_job_match       | Recording job match (×6)
+record_job_match       | Recording job match (x6)
+get_issue_context      | Retrieving issue context (cross-session memory)
 civic_agent            | process_message
 ```
 
-**Persistent memory proof**: Start a new session and say "Continue where we left off" — the agent retrieves full issue context, timeline, and job matches from CockroachDB.
+**Persistent memory verified end-to-end:**
+1. Report: "Engineering graduates in Thanjavur cannot find cloud/DevOps jobs"
+2. Agent creates issue + finds jobs → stored in CockroachDB
+3. Follow-up: "Continue with the employment issue about Thanjavur"
+4. Agent calls `get_issue_context` → retrieves full state from CockroachDB
+5. Response correctly shows title, location, category, status — all from persistent memory
+
+### India-Focused Civic Intelligence
+
+- India location selector with 28 states + 8 Union Territories + 200+ cities
+- Tamil Nadu default with city-level filtering (Chennai, Coimbatore, Madurai, Thanjavur...)
+- Civic categories: Employment, Education, Infrastructure, Healthcare, Digital Access, etc.
+- Responsive mobile-first design with collapsible navigation
 
 ---
 
@@ -84,6 +97,7 @@ flowchart TB
 ```
 
 See [docs/architecture-diagram.md](docs/architecture-diagram.md) for full diagrams including draw.io XML.
+
 
 ---
 
@@ -322,6 +336,19 @@ See [docs/database.md](docs/database.md) for full schema.
 | [Demo Flow](docs/demo-flow.md) | Quick demo checklist |
 | [Deployment](docs/deployment.md) | Vercel + alternatives |
 | [Hackathon Evidence](docs/hackathon-evidence.md) | Evidence matrix |
+| [Hackathon Submission](docs/hackathon-submission.md) | Full submission text |
+| [Project Article](docs/article.md) | Build story + challenges |
+
+---
+
+## Testing Credentials
+
+| Field | Value |
+|-------|-------|
+| Demo Username | `demo` |
+| Demo Password | `demo123` |
+
+> Authentication is optional — all features work without login. The agent, issues, jobs, and activity pages are publicly accessible.
 
 ---
 

@@ -196,3 +196,52 @@ The `@tool` decorator pattern with Bedrock's native tool-calling makes it natura
 | Live Demo | https://cjp-fawn.vercel.app |
 | GitHub Repository | https://github.com/dineshrajdhanapathyDD/cjp-Civic-Journey-Platform |
 | API Health Check | https://cjp-fawn.vercel.app/api/health |
+| Agent Activity (Memory Layer) | https://cjp-fawn.vercel.app/activity |
+
+---
+
+## Verified Persistent Memory Flow
+
+Tested and confirmed working on the live deployment:
+
+```
+Step 1: REPORT
+  → "Engineering graduates in Thanjavur cannot find cloud/DevOps jobs"
+  
+Step 2: CockroachDB STORES
+  → Issue created: "Lack of Cloud Computing and DevOps Jobs for Engineering 
+     Graduates in Thanjavur, Tamil Nadu" (ID: bcab7fc3-bb5f-463f-bdcf-ef3b2e1618bd)
+  → Vector embedding stored (1024-dim)
+  → Timeline event created
+  → 2 job matches recorded
+
+Step 3: MEMORY LOGGED
+  → agent_actions table: search_civic_memory, create_civic_issue, 
+     find_job_opportunities, record_job_match x2
+
+Step 4: FOLLOW-UP (simulating new session)
+  → "Continue with the employment issue about Thanjavur graduates"
+
+Step 5: RETRIEVED FROM COCKROACHDB
+  → Agent calls get_issue_context → retrieves full state
+  → Title, description, category, location, status, priority all loaded
+
+Step 6: CORRECT RESPONSE
+  → Agent accurately reports: "Lack of Cloud Computing and DevOps Jobs for 
+     Engineering Graduates in Thanjavur, Tamil Nadu"
+  → Status: open, Priority: medium, Location: Thanjavur, Tamil Nadu
+  → Suggests next actions: record evidence, search more jobs, propose actions
+```
+
+This proves CockroachDB IS the agent's persistent memory — not session storage.
+
+---
+
+## Testing Credentials
+
+| Field | Value |
+|-------|-------|
+| Username | `demo` |
+| Password | `demo123` |
+
+No login required — all features accessible directly.
