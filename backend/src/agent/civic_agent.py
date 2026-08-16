@@ -200,6 +200,9 @@ class CivicAgent:
         try:
             result = self.agent(full_prompt)
             response_text = str(result)
+
+            # Extract tool use events from the agent's result message
+            self._extract_tool_actions_from_result(result, conversation_id)
         except Exception as e:
             logger.error(f"Agent error: {e}")
             response_text = (
@@ -252,6 +255,107 @@ class CivicAgent:
                 )
         except Exception as e:
             logger.error(f"Error recording agent activity: {e}")
+
+    def _extract_tool_actions_from_result(self, result, conversation_id: Optional[str]):
+        """Extract and log individual tool calls from the agent's result."""
+        try:
+            # Get messages from the agent's conversation
+            messages = getattr(self.agent, 'messages', None) or []
+
+            found_tools = set()
+            for msg in messages:
+                if not isinstance(msg, dict):
+                    continue
+                content = msg.get("content", [])
+                if not isinstance(content, list):
+                    continue
+                for block in content:
+                    if not isinstance(block, dict):
+                        continue
+                    # Strands format: {"toolUse": {"name": "...", "input": {...}}}
+                    tool_use = block.get("toolUse")
+                    if tool_use and isinstance(tool_use, dict):
+                        tool_name = tool_use.get("name", "unknown")
+                        tool_input = tool_use.get("input", {})
+                        call_key = f"{tool_name}:{json.dumps(tool_input, sort_keys=True)[:100]}"
+                        if call_key not in found_tools:
+                            found_tools.add(call_key)
+                            self._log_tool_call(conversation_id, tool_name, tool_input)
+        except Exception as e:
+            logger.debug(f"Could not extract tool actions from result: {e}")
+
+    def _extract_tool_actions(self, conversation_id: Optional[str]):
+        """Extract and log individual tool calls from the agent's execution."""
+        try:
+            # Access the agent's messages to find tool_use and tool_result events
+            messages = getattr(self.agent, 'messages', []) or []
+            for msg in messages:
+                if not isinstance(msg, dict):
+                    continue
+                content = msg.get("content", [])
+                if not isinstance(content, list):
+                    continue
+                for block in content:
+                    if not isinstance(block, dict):
+                        continue
+                    if block.get("type") == "tool_use":
+                        tool_name = block.get("name", "unknown")
+                        tool_input = block.get("input", {})
+                        # Log this tool call
+                        self._log_tool_call(conversation_id, tool_name, tool_input)
+                    elif block.get("type") == "toolUse":
+                        tool_name = block.get("name", "unknown")
+                        tool_input = block.get("input", {})
+                        self._log_tool_call(conversation_id, tool_name, tool_input)
+        except Exception as e:
+            logger.debug(f"Could not extract tool actions: {e}")
+
+    def _log_tool_call(self, conversation_id: Optional[str], tool_name: str, tool_input: dict):
+        """Log a single tool call to the agent_actions table."""
+        try:
+            # Create a short action description
+            action_desc = tool_name
+            if tool_name == "search_civic_memory":
+                action_desc = f"Searching civic memory: {tool_input.get('query', '')[:80]}"
+            elif tool_name == "find_related_issues":
+                action_desc = f"Finding related issues: {tool_input.get('query', '')[:80]}"
+            elif tool_name == "create_civic_issue":
+                action_desc = f"Creating issue: {tool_input.get('title', '')[:80]}"
+            elif tool_name == "update_issue":
+                action_desc = f"Updating issue: {tool_input.get('issue_id', '')[:36]}"
+            elif tool_name == "get_issue_context":
+                action_desc = f"Retrieving issue context: {tool_input.get('issue_id', '')[:36]}"
+            elif tool_name == "find_job_opportunities":
+                action_desc = f"Searching jobs: {tool_input.get('query', '')[:80]}"
+            elif tool_name == "record_job_match":
+                action_desc = f"Recording job match"
+            elif tool_name == "record_evidence":
+                action_desc = f"Recording evidence: {tool_input.get('source', '')[:50]}"
+            elif tool_name == "record_action":
+                action_desc = f"Recording action: {tool_input.get('action_type', '')}"
+            elif tool_name == "get_issue_timeline":
+                action_desc = f"Getting timeline: {tool_input.get('issue_id', '')[:36]}"
+            elif tool_name == "add_timeline_event":
+                action_desc = f"Adding timeline event: {tool_input.get('event_type', '')}"
+
+            with get_cursor() as cursor:
+                cursor.execute(
+                    """
+                    INSERT INTO agent_actions
+                        (conversation_id, tool_name, action, status, duration_ms)
+                    VALUES (%s, %s, %s, 'completed', 0)
+                    """,
+                    (conversation_id, tool_name, action_desc),
+                )
+
+            # Also track for the response
+            self._agent_actions.append({
+                "tool_name": tool_name,
+                "action": action_desc,
+                "status": "completed",
+            })
+        except Exception as e:
+            logger.debug(f"Error logging tool call: {e}")
 
     def get_recent_actions(
         self, conversation_id: Optional[str] = None, limit: int = 20
