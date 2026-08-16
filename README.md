@@ -113,18 +113,7 @@ See [docs/architecture-diagram.md](docs/architecture-diagram.md) for full diagra
 - Semantic matching by skills and experience
 - Never fabricates listings or auto-applies
 
----
 
-## Demo Flow (3 Minutes)
-
-1. **0:00-0:30** — Report: "There aren't enough technology jobs for graduates in my area."
-2. **0:30-1:00** — Agent searches CockroachDB memory via vector index, creates issue
-3. **1:00-1:30** — View Issue Journey: timeline, reports, evidence, actions
-4. **1:30-2:15** — Ask for jobs: agent finds 6+ opportunities via semantic matching
-5. **2:15-2:40** — New session: "Continue where we left off" — persistent memory works
-6. **2:40-3:00** — Agent Activity panel shows all MCP/vector/skill operations
-
-See [docs/demo-video-story.md](docs/demo-video-story.md) for full script.
 
 ---
 
