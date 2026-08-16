@@ -1,191 +1,139 @@
-# CJP Architecture Diagram
+# CJP Architecture Diagrams
 
-## System Architecture (Draw.io Compatible)
+> Open [cjp-architecture.drawio](cjp-architecture.drawio) in https://app.diagrams.net for the interactive diagram.
 
-The following diagram can be imported directly into [draw.io](https://app.diagrams.net/) using the XML below, or viewed as Mermaid diagrams.
+---
 
-### High-Level Architecture
+## System Architecture
 
 ```mermaid
 flowchart TB
-    subgraph USER_LAYER["User Layer"]
-        USER[("Citizen / User")]
-        BROWSER["Web Browser"]
+    subgraph USERS["👤 Users"]
+        CITIZEN[Citizen / User]
     end
 
-    subgraph FRONTEND["Frontend - React + TypeScript"]
-        DASHBOARD["Dashboard"]
-        AGENT_UI["Civic Agent Chat"]
-        ISSUES_UI["Issues Explorer"]
-        JOBS_UI["Jobs Browser"]
-        ACTIVITY_UI["Agent Activity Monitor"]
+    subgraph VERCEL["☁️ Vercel (Production)"]
+        subgraph FE["Frontend"]
+            REACT[React 18 + TypeScript + Tailwind]
+        end
+        subgraph BE["Backend (Serverless)"]
+            FASTAPI[FastAPI + Mangum]
+        end
     end
 
-    subgraph BACKEND["Backend - Python FastAPI"]
-        API["REST API Gateway<br/>FastAPI"]
-        STRANDS["Strands Agent<br/>Orchestration Layer"]
-        TOOLS["Agent Tools<br/>11 Civic Skills"]
-        EMBED["Embedding Service<br/>Titan V2 - 1024dim"]
+    subgraph AGENT_LAYER["🧠 Agent Layer"]
+        STRANDS[Strands Agent SDK 0.1.5]
+        TOOLS[11 Agent Tools]
     end
 
-    subgraph AWS["Amazon Web Services"]
-        BEDROCK_LLM["Amazon Bedrock<br/>Nova Pro v1"]
-        BEDROCK_EMB["Amazon Bedrock<br/>Titan Embed V2"]
-        S3["Amazon S3<br/>Evidence Storage"]
-        CW["CloudWatch<br/>Monitoring"]
+    subgraph AWS["🟠 Amazon Web Services"]
+        NOVA[Bedrock Nova Pro v1<br/>Reasoning]
+        TITAN[Bedrock Titan Embed V2<br/>1024-dim Vectors]
     end
 
-    subgraph COCKROACHDB["CockroachDB Cloud"]
-        MCP_SERVER["CockroachDB Cloud<br/>MCP Server"]
-        CRDB[("CockroachDB<br/>Distributed Database")]
-        VECTOR_IDX["C-SPANN Vector Indexes<br/>Distributed ANN Search"]
-        SKILLS["CockroachDB<br/>Agent Skills"]
+    subgraph CRDB["🪳 CockroachDB Cloud"]
+        MCP[MCP Server<br/>Agent-DB Bridge]
+        SKILLS[Agent Skills<br/>Vector Search • Upsert • Multi-Table Txn]
+        DB[(CockroachDB v26.2<br/>13 Tables)]
+        VECTOR[C-SPANN Vector Indexes<br/>5 Distributed HNSW Indexes]
     end
 
-    subgraph CCLOUD["Operations"]
-        CLI["ccloud CLI<br/>Environment Management"]
+    subgraph OPS["⚙️ Operations"]
+        CCLOUD[ccloud CLI]
     end
 
-    USER --> BROWSER
-    BROWSER --> FRONTEND
-    FRONTEND --> API
-
-    API --> STRANDS
-    STRANDS --> BEDROCK_LLM
+    CITIZEN --> REACT
+    REACT --> FASTAPI
+    FASTAPI --> STRANDS
     STRANDS --> TOOLS
-    TOOLS --> EMBED
-    EMBED --> BEDROCK_EMB
-    TOOLS --> MCP_SERVER
+    STRANDS --> NOVA
+    TOOLS --> TITAN
+    TOOLS --> MCP
     TOOLS --> SKILLS
-
-    MCP_SERVER --> CRDB
-    SKILLS --> CRDB
-    CRDB --> VECTOR_IDX
-
-    STRANDS --> S3
-    API --> CW
-    CLI -.-> CRDB
+    MCP --> DB
+    SKILLS --> DB
+    DB --> VECTOR
+    CCLOUD -.->|Environment Mgmt| DB
 ```
 
-### Data Flow Architecture
+---
+
+## Agent Decision Flow
 
 ```mermaid
-flowchart LR
-    subgraph INPUT["Citizen Input"]
-        REPORT["Civic Report"]
-        QUERY["Question / Follow-up"]
-        JOB_REQ["Job Search Request"]
-    end
+flowchart TD
+    A[Citizen Message] --> B[Strands Agent<br/>Nova Pro]
 
-    subgraph AGENT["Strands Agent Processing"]
-        REASON["Reasoning<br/>Nova Pro"]
-        TOOL_SELECT["Dynamic Tool Selection"]
-    end
+    B --> C{Search Memory?}
+    C -->|Yes| D[search_civic_memory<br/>Vector Search]
+    D --> E[C-SPANN Index Scan]
+    E --> F[Related Issues/Reports]
 
-    subgraph TOOLS["Agent Tools"]
-        T1["search_civic_memory"]
-        T2["find_related_issues"]
-        T3["create_civic_issue"]
-        T4["update_issue"]
-        T5["get_issue_context"]
-        T6["record_evidence"]
-        T7["record_action"]
-        T8["find_job_opportunities"]
-        T9["record_job_match"]
-        T10["get_issue_timeline"]
-        T11["add_timeline_event"]
-    end
+    F --> G{Related Issue Exists?}
+    G -->|Yes, similarity > 0.75| H[Link to Existing Issue]
+    G -->|No| I[create_civic_issue<br/>+ Generate Embedding]
 
-    subgraph DB["CockroachDB Cloud"]
-        ISSUES[("Issues")]
-        REPORTS[("Reports")]
-        EVIDENCE[("Evidence")]
-        TIMELINE[("Timeline")]
-        JOBS[("Job Opportunities")]
-        MATCHES[("Job Matches")]
-        VECTORS[/"Vector Indexes"/]
-    end
+    B --> J{Employment Related?}
+    J -->|Yes| K[find_job_opportunities<br/>Semantic Matching]
+    K --> L[C-SPANN Job Index]
+    L --> M[Ranked Job Results]
+    M --> N[record_job_match]
 
-    INPUT --> AGENT
-    REASON --> TOOL_SELECT
-    TOOL_SELECT --> TOOLS
+    I --> O[add_timeline_event]
+    H --> O
+    N --> O
 
-    T1 --> VECTORS
-    T2 --> VECTORS
-    T3 --> ISSUES
-    T4 --> ISSUES
-    T5 --> ISSUES
-    T6 --> EVIDENCE
-    T7 --> TIMELINE
-    T8 --> VECTORS
-    T9 --> MATCHES
-    T10 --> TIMELINE
-    T11 --> TIMELINE
-
-    VECTORS --> ISSUES
-    VECTORS --> REPORTS
-    VECTORS --> JOBS
+    O --> P[CockroachDB<br/>State Persisted]
+    P --> Q[Response to Citizen]
 ```
 
-### MCP Integration Architecture
+---
+
+## Cross-Session Memory Flow
 
 ```mermaid
 sequenceDiagram
     participant U as Citizen
     participant A as Strands Agent
-    participant M as MCP Client
-    participant S as CockroachDB MCP Server
-    participant D as CockroachDB Cloud
-    participant V as Vector Index
+    participant DB as CockroachDB Cloud
 
-    U->>A: "There aren't enough tech jobs for graduates"
-    A->>A: Reasoning (Nova Pro)
-    A->>M: search_civic_memory(query)
-    M->>S: run_sql (vector search)
-    S->>D: SELECT ... embedding <=> query
-    D->>V: C-SPANN ANN Search
-    V-->>D: Top-K results
-    D-->>S: Related issues + reports
-    S-->>M: MCP response
-    M-->>A: Context retrieved
+    Note over U,DB: Session 1
+    U->>A: "No tech jobs for graduates"
+    A->>DB: search_civic_memory (vector)
+    DB-->>A: No matches
+    A->>DB: create_civic_issue + embedding
+    A->>DB: find_job_opportunities (vector)
+    DB-->>A: 6 jobs matched
+    A->>DB: record_job_match × 6
+    A->>DB: add_timeline_event
+    A-->>U: Issue created + jobs found
 
-    A->>A: Decision: Create new issue
-    A->>M: create_civic_issue(...)
-    M->>S: INSERT INTO issues (...)
-    S->>D: Write with embedding
-    D-->>S: Created
-    S-->>M: Confirmed
-    M-->>A: Issue created
+    Note over U,DB: NEW SESSION (next day)
+    U->>A: "Continue where we left off"
+    A->>DB: get_issue_context
+    DB-->>A: Issue + timeline + reports + jobs
+    A->>DB: get_issue_timeline
+    DB-->>A: Full accountability history
+    A-->>U: "Here's your issue status..."
 
-    A->>M: find_job_opportunities(skills)
-    M->>S: run_sql (vector search jobs)
-    S->>D: SELECT ... FROM job_opportunities
-    D->>V: Semantic job matching
-    V-->>D: Ranked results
-    D-->>S: Job listings
-    S-->>M: Jobs found
-    M-->>A: 6 opportunities matched
-
-    A-->>U: Issue created + jobs recommended
+    Note over DB: All state persists in CockroachDB
 ```
 
-### Database Schema Diagram
+---
+
+## Data Model
 
 ```mermaid
 erDiagram
     USERS ||--o{ REPORTS : submits
-    USERS ||--o{ CONVERSATIONS : participates
     USERS ||--o{ JOB_MATCHES : receives
-
-    ISSUES ||--o{ REPORTS : contains
+    ISSUES ||--o{ REPORTS : consolidates
     ISSUES ||--o{ EVIDENCE : supported_by
     ISSUES ||--o{ ISSUE_TIMELINE : tracked_by
     ISSUES ||--o{ ACTIONS : addresses
     ISSUES ||--o{ RESPONSES : receives
     ISSUES ||--o{ JOB_MATCHES : resolves
-
     JOB_OPPORTUNITIES ||--o{ JOB_MATCHES : matched_to
-
     CONVERSATIONS ||--o{ MESSAGES : contains
 
     ISSUES {
@@ -194,130 +142,65 @@ erDiagram
         string description
         string category
         string status
-        string priority
         float confidence
-        vector embedding
-    }
-
-    REPORTS {
-        uuid id PK
-        uuid user_id FK
-        uuid issue_id FK
-        string content
-        vector embedding
+        vector_1024 embedding
     }
 
     JOB_OPPORTUNITIES {
         uuid id PK
         string title
         string company
-        string description
         string apply_url
-        vector embedding
-    }
-
-    ISSUE_TIMELINE {
-        uuid id PK
-        uuid issue_id FK
-        string event_type
-        string description
-        string actor
+        string verification_status
+        vector_1024 embedding
     }
 
     AGENT_ACTIONS {
         uuid id PK
-        uuid conversation_id
         string tool_name
         string action
-        string status
         int duration_ms
     }
 ```
 
 ---
 
-## Draw.io XML Export
+## Deployment Architecture
 
-To import into draw.io, use **File > Import from > Text** and paste this XML:
+```mermaid
+flowchart LR
+    subgraph INTERNET["Internet"]
+        USER[User Browser]
+    end
 
-```xml
-<mxfile>
-  <diagram name="CJP Architecture">
-    <mxGraphModel>
-      <root>
-        <mxCell id="0"/>
-        <mxCell id="1" parent="0"/>
-        <!-- User -->
-        <mxCell id="2" value="Citizen" style="shape=actor;whiteSpace=wrap;" vertex="1" parent="1">
-          <mxGeometry x="380" y="20" width="40" height="60" as="geometry"/>
-        </mxCell>
-        <!-- Frontend -->
-        <mxCell id="3" value="CJP Web App&#xa;React + TypeScript + Tailwind" style="rounded=1;whiteSpace=wrap;fillColor=#dae8fc;" vertex="1" parent="1">
-          <mxGeometry x="300" y="120" width="200" height="50" as="geometry"/>
-        </mxCell>
-        <!-- API -->
-        <mxCell id="4" value="FastAPI Gateway" style="rounded=1;whiteSpace=wrap;fillColor=#d5e8d4;" vertex="1" parent="1">
-          <mxGeometry x="300" y="210" width="200" height="40" as="geometry"/>
-        </mxCell>
-        <!-- Agent -->
-        <mxCell id="5" value="Strands Agent&#xa;Amazon Bedrock Nova Pro" style="rounded=1;whiteSpace=wrap;fillColor=#e1d5e7;" vertex="1" parent="1">
-          <mxGeometry x="300" y="290" width="200" height="50" as="geometry"/>
-        </mxCell>
-        <!-- MCP -->
-        <mxCell id="6" value="CockroachDB Cloud&#xa;MCP Server" style="rounded=1;whiteSpace=wrap;fillColor=#fff2cc;" vertex="1" parent="1">
-          <mxGeometry x="180" y="390" width="150" height="50" as="geometry"/>
-        </mxCell>
-        <!-- CockroachDB -->
-        <mxCell id="7" value="CockroachDB Cloud&#xa;Persistent Civic Memory" style="shape=cylinder3;whiteSpace=wrap;fillColor=#f8cecc;" vertex="1" parent="1">
-          <mxGeometry x="300" y="490" width="200" height="70" as="geometry"/>
-        </mxCell>
-        <!-- Vector -->
-        <mxCell id="8" value="C-SPANN&#xa;Distributed Vector Indexes" style="rounded=1;whiteSpace=wrap;fillColor=#ffe6cc;" vertex="1" parent="1">
-          <mxGeometry x="470" y="390" width="150" height="50" as="geometry"/>
-        </mxCell>
-        <!-- Agent Skills -->
-        <mxCell id="9" value="CockroachDB&#xa;Agent Skills" style="rounded=1;whiteSpace=wrap;fillColor=#fff2cc;" vertex="1" parent="1">
-          <mxGeometry x="550" y="290" width="120" height="50" as="geometry"/>
-        </mxCell>
-        <!-- ccloud -->
-        <mxCell id="10" value="ccloud CLI" style="rounded=1;whiteSpace=wrap;fillColor=#f5f5f5;" vertex="1" parent="1">
-          <mxGeometry x="80" y="490" width="100" height="40" as="geometry"/>
-        </mxCell>
-        <!-- Bedrock -->
-        <mxCell id="11" value="Amazon Bedrock&#xa;Titan Embed V2" style="rounded=1;whiteSpace=wrap;fillColor=#dae8fc;" vertex="1" parent="1">
-          <mxGeometry x="80" y="290" width="140" height="50" as="geometry"/>
-        </mxCell>
-        <!-- Edges -->
-        <mxCell id="e1" edge="1" source="2" target="3" parent="1"/>
-        <mxCell id="e2" edge="1" source="3" target="4" parent="1"/>
-        <mxCell id="e3" edge="1" source="4" target="5" parent="1"/>
-        <mxCell id="e4" edge="1" source="5" target="6" parent="1"/>
-        <mxCell id="e5" edge="1" source="5" target="8" parent="1"/>
-        <mxCell id="e6" edge="1" source="5" target="9" parent="1"/>
-        <mxCell id="e7" edge="1" source="6" target="7" parent="1"/>
-        <mxCell id="e8" edge="1" source="8" target="7" parent="1"/>
-        <mxCell id="e9" edge="1" source="9" target="7" parent="1"/>
-        <mxCell id="e10" edge="1" source="5" target="11" parent="1"/>
-        <mxCell id="e11" edge="1" source="10" target="7" style="dashed=1;" parent="1"/>
-      </root>
-    </mxGraphModel>
-  </diagram>
-</mxfile>
+    subgraph VERCEL["Vercel Edge Network"]
+        CDN[CDN / Static Assets]
+        FN[Python Serverless Function<br/>FastAPI + Mangum]
+    end
+
+    subgraph AWS_REGION["AWS us-east-1"]
+        BEDROCK[Amazon Bedrock<br/>Nova Pro + Titan]
+    end
+
+    subgraph CRDB_CLOUD["CockroachDB Cloud us-east-1"]
+        CLUSTER[(cjpaws Cluster<br/>13 Tables + 5 Vector Indexes)]
+    end
+
+    USER --> CDN
+    USER --> FN
+    FN --> BEDROCK
+    FN --> CLUSTER
 ```
 
 ---
 
-## Technology Summary
+## How to Open the draw.io File
 
-| Component | Technology | Role |
-|-----------|-----------|------|
-| Frontend | React 18 + TypeScript + Tailwind CSS | User interface |
-| Backend | Python 3.11 + FastAPI | API server |
-| Agent | Strands Agents SDK 0.1.5 | Orchestration |
-| LLM | Amazon Bedrock Nova Pro v1 | Reasoning |
-| Embeddings | Amazon Bedrock Titan Embed V2 | 1024-dim vectors |
-| Database | CockroachDB Cloud v26.2 | Persistent memory |
-| Vector Index | C-SPANN (distributed ANN) | Semantic search |
-| MCP | CockroachDB Cloud MCP Server | Agent-DB bridge |
-| Skills | CockroachDB Agent Skills | Reusable DB ops |
-| CLI | ccloud CLI | Cluster management |
+1. Go to https://app.diagrams.net
+2. Click **File → Open From → Device**
+3. Select `docs/cjp-architecture.drawio`
+4. The file contains 2 pages:
+   - **Page 1**: Full system architecture with all components
+   - **Page 2**: Agent data flow decision tree
+
+Or view it directly on GitHub — `.drawio` files render as clickable diagrams.

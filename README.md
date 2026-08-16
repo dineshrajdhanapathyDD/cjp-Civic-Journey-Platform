@@ -1,71 +1,130 @@
 # CJP — Civic Journey Platform
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![CockroachDB](https://img.shields.io/badge/CockroachDB-Cloud-green.svg)](https://cockroachlabs.cloud)
-[![AWS](https://img.shields.io/badge/AWS-Bedrock-orange.svg)](https://aws.amazon.com/bedrock/)
-[![Strands](https://img.shields.io/badge/Strands-Agents_SDK-purple.svg)](https://github.com/strands-agents/sdk-python)
+[![Deploy](https://img.shields.io/badge/Live-cjp--fawn.vercel.app-brightgreen.svg)](https://cjp-fawn.vercel.app)
+[![CockroachDB](https://img.shields.io/badge/CockroachDB-Cloud_v26.2-green.svg)](https://cockroachlabs.cloud)
+[![AWS Bedrock](https://img.shields.io/badge/AWS-Bedrock_Nova_Pro-orange.svg)](https://aws.amazon.com/bedrock/)
+[![Strands](https://img.shields.io/badge/Strands-Agents_SDK_0.1.5-purple.svg)](https://github.com/strands-agents/sdk-python)
 
-**From Citizen Voice to Accountable Action**
+> **From Citizen Voice to Accountable Action**
 
-CJP is an agentic civic intelligence platform that transforms fragmented citizen reports into persistent civic issues with full accountability tracking, semantic search, and practical job resolutions. The AI agent uses CockroachDB as its persistent memory and state layer.
+CJP is an **agentic civic intelligence platform** that transforms fragmented citizen reports into persistent civic issues with full accountability tracking, semantic search, and practical job resolutions.
+
+The AI agent uses **CockroachDB as its persistent memory and state layer** — not a chatbot with a database, but a real agentic system where the agent autonomously decides what tools to use.
+
+## Live Demo
+
+**https://cjp-fawn.vercel.app**
+
+| Page | URL |
+|------|-----|
+| Dashboard | https://cjp-fawn.vercel.app |
+| Civic Agent Chat | https://cjp-fawn.vercel.app/agent |
+| Issues | https://cjp-fawn.vercel.app/issues |
+| Jobs | https://cjp-fawn.vercel.app/jobs |
+| Agent Activity | https://cjp-fawn.vercel.app/activity |
+| API Health | https://cjp-fawn.vercel.app/api/health |
 
 ---
 
-## Hackathon
+## Hackathon: CockroachDB x AWS
 
 Built for the **CockroachDB x AWS Hackathon**.
 
-| Requirement | Implementation |
-|-------------|---------------|
-| CockroachDB Cloud MCP Server | Agent queries/writes through official MCP server |
-| Distributed Vector Indexing | C-SPANN indexes on 5 tables for semantic search |
-| ccloud CLI | Cluster creation, schema deployment, connection config |
-| CockroachDB Agent Skills | Transactional upsert, vector search, multi-table transactions |
-| Strands Agents SDK | Dynamic tool selection with 11 agent tools |
-| Amazon Bedrock | Nova Pro (reasoning) + Titan Embed V2 (1024-dim vectors) |
+### Required Tools — All Implemented
+
+| Requirement | Implementation | Evidence |
+|-------------|---------------|----------|
+| **CockroachDB Cloud MCP Server** | Agent queries/writes through official MCP server | Agent Activity panel |
+| **Distributed Vector Indexing** | C-SPANN indexes on 5 tables (1024-dim) | Semantic search results |
+| **ccloud CLI** | Cluster creation, schema deploy, API keys | [docs/ccloud-setup.md](docs/ccloud-setup.md) |
+| **CockroachDB Agent Skills** | Transactional upsert, vector search, multi-table txn | [docs/cockroachdb-agent-skills.md](docs/cockroachdb-agent-skills.md) |
+| **Strands Agents SDK** | Dynamic tool selection with 11 agent tools | Agent reasoning visible |
+| **Amazon Bedrock** | Nova Pro (reasoning) + Titan Embed V2 (vectors) | Agent responses + search |
 
 ---
-
-
 
 ## Architecture
 
 ```
-Citizen → React UI → FastAPI → Strands Agent → CockroachDB Cloud
-                                    ↓                    ↑
-                              Amazon Bedrock       MCP Server
-                              (Nova Pro + Titan)   (Agent Bridge)
+Citizen → React Dashboard → FastAPI → Strands Agent → CockroachDB Cloud
+                                          ↕                    ↑
+                                    Amazon Bedrock        MCP Server
+                                  (Nova Pro + Titan)    (Agent Bridge)
 ```
 
 ```mermaid
 flowchart TB
-    USER[Citizen] --> UI[React Dashboard]
-    UI --> API[FastAPI]
-    API --> AGENT[Strands Agent<br/>Amazon Bedrock Nova Pro]
-    AGENT --> MCP[CockroachDB MCP Server]
-    AGENT --> SKILLS[Agent Skills]
-    MCP --> DB[(CockroachDB Cloud)]
+    USER[Citizen] --> UI[React + TypeScript + Tailwind]
+    UI --> API[FastAPI Gateway - 20 endpoints]
+    API --> AGENT[Strands Agent - Amazon Bedrock Nova Pro]
+    AGENT --> MCP[CockroachDB Cloud MCP Server]
+    AGENT --> SKILLS[CockroachDB Agent Skills]
+    AGENT --> EMBED[Titan Embed V2 - 1024 dim]
+    MCP --> DB[(CockroachDB Cloud v26.2)]
     SKILLS --> DB
-    DB --> VECTOR[C-SPANN Vector Indexes]
+    DB --> VECTOR[C-SPANN Distributed Vector Indexes]
+    CCLOUD[ccloud CLI] -.-> DB
 ```
 
-See [docs/architecture-diagram.md](docs/architecture-diagram.md) for full diagrams.
+See [docs/architecture-diagram.md](docs/architecture-diagram.md) for full diagrams including draw.io XML.
 
 ---
 
 ## Tech Stack
 
-| Layer | Technology |
-|-------|-----------|
-| Frontend | React 18 + TypeScript + Tailwind CSS + Vite |
-| Backend | Python 3.11 + FastAPI + Uvicorn |
-| Agent | Strands Agents SDK 0.1.5 |
-| LLM | Amazon Bedrock — Nova Pro v1 |
-| Embeddings | Amazon Bedrock — Titan Embed V2 (1024-dim) |
-| Database | CockroachDB Cloud v26.2 |
-| Vector Search | CockroachDB C-SPANN Distributed Indexes |
-| MCP | CockroachDB Cloud MCP Server |
-| CLI | ccloud CLI |
+| Layer | Technology | Version |
+|-------|-----------|---------|
+| Frontend | React + TypeScript + Tailwind CSS + Vite | 18.3 / 5.6 / 3.4 / 6.0 |
+| Backend | Python + FastAPI + Uvicorn | 3.11 / 0.115 / 0.34 |
+| Agent | Strands Agents SDK | 0.1.5 |
+| LLM | Amazon Bedrock Nova Pro | v1 |
+| Embeddings | Amazon Bedrock Titan Embed V2 | 1024-dim |
+| Database | CockroachDB Cloud | v26.2.5 |
+| Vector Index | CockroachDB C-SPANN (Distributed ANN) | HNSW |
+| MCP | CockroachDB Cloud MCP Server | Official |
+| Deployment | Vercel (Serverless) | Production |
+
+---
+
+## Features
+
+### Civic Agent (AI-Powered)
+- Natural language civic issue reporting
+- Autonomous tool selection (not hardcoded flows)
+- Persistent memory across sessions via CockroachDB
+- Semantic search for related issues and reports
+- Job opportunity matching for employment issues
+
+### Distributed Vector Indexing
+- 5 C-SPANN vector indexes across tables
+- 1024-dimensional embeddings (Titan V2)
+- Finds related issues even when worded differently
+- Semantic job matching by skills, location, experience
+
+### Accountability Timeline
+- Every agent action recorded
+- Full issue history: created → investigated → resolved
+- Evidence tracking with verification status
+- Job match recording with source links
+
+### Job Resolution
+- Verified job listings only (source + apply URL required)
+- Semantic matching by skills and experience
+- Never fabricates listings or auto-applies
+
+---
+
+## Demo Flow (3 Minutes)
+
+1. **0:00-0:30** — Report: "There aren't enough technology jobs for graduates in my area."
+2. **0:30-1:00** — Agent searches CockroachDB memory via vector index, creates issue
+3. **1:00-1:30** — View Issue Journey: timeline, reports, evidence, actions
+4. **1:30-2:15** — Ask for jobs: agent finds 6+ opportunities via semantic matching
+5. **2:15-2:40** — New session: "Continue where we left off" — persistent memory works
+6. **2:40-3:00** — Agent Activity panel shows all MCP/vector/skill operations
+
+See [docs/demo-video-story.md](docs/demo-video-story.md) for full script.
 
 ---
 
@@ -76,59 +135,36 @@ See [docs/architecture-diagram.md](docs/architecture-diagram.md) for full diagra
 - Python 3.11+
 - Node.js 18+
 - AWS account with Bedrock access (Nova Pro + Titan Embed V2)
-- CockroachDB Cloud account (free tier works)
+- CockroachDB Cloud account (free tier)
 
 ### 1. Clone
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/cjp.git
-cd cjp
+git clone https://github.com/dineshrajdhanapathyDD/cjp-Civic-Journey-Platform.git
+cd cjp-Civic-Journey-Platform
 ```
 
-### 2. Backend Setup
+### 2. Backend
 
 ```bash
 cd backend
 python -m venv venv
-
-# Windows
-.\venv\Scripts\activate
-# macOS/Linux
-source venv/bin/activate
-
-pip install --upgrade pip
+# Windows: .\venv\Scripts\activate
+# macOS/Linux: source venv/bin/activate
 pip install -r requirements.txt
-```
-
-### 3. Configure Environment
-
-```bash
 cp .env.example .env
-```
-
-Edit `backend/.env`:
-```env
-COCKROACHDB_URL=postgresql://user:password@your-cluster.cockroachlabs.cloud:26257/cjp?sslmode=require
-AWS_REGION=us-east-1
-BEDROCK_MODEL_ID=amazon.nova-pro-v1:0
-EMBEDDING_MODEL_ID=amazon.titan-embed-text-v2:0
-```
-
-### 4. Initialize Database
-
-The backend auto-runs migrations on startup. Just start it:
-
-```bash
+# Edit .env with your CockroachDB + AWS credentials
 python -m uvicorn src.main:app --host 0.0.0.0 --port 8000
 ```
 
-### 5. Seed Demo Data
+### 3. Seed Data
 
 ```bash
 python seed.py
+# Creates demo user + 8 verified job opportunities with embeddings
 ```
 
-### 6. Frontend Setup
+### 4. Frontend
 
 ```bash
 cd ../frontend
@@ -136,11 +172,31 @@ npm install
 npm run dev
 ```
 
-### 7. Open
+### 5. Open
 
 - Dashboard: http://localhost:5173
 - API Docs: http://localhost:8000/docs
-- Health: http://localhost:8000/api/health
+
+---
+
+## Environment Variables
+
+```env
+# CockroachDB Cloud
+COCKROACHDB_URL=postgresql://user:pass@cluster.cockroachlabs.cloud:26257/cjp?sslmode=require
+
+# AWS Bedrock
+AWS_REGION=us-east-1
+AWS_ACCESS_KEY_ID=your-key
+AWS_SECRET_ACCESS_KEY=your-secret
+BEDROCK_MODEL_ID=amazon.nova-pro-v1:0
+EMBEDDING_MODEL_ID=amazon.titan-embed-text-v2:0
+EMBEDDING_DIMENSIONS=1024
+
+# Application
+APP_SECRET_KEY=your-secret-key
+FRONTEND_URL=http://localhost:5173
+```
 
 ---
 
@@ -148,36 +204,27 @@ npm run dev
 
 ```
 cjp/
+├── api/                        # Vercel serverless function
+│   └── index.py               # FastAPI → Mangum adapter
 ├── backend/                    # Python backend
 │   ├── src/
 │   │   ├── agent/             # Strands agent + 11 tools
-│   │   │   ├── civic_agent.py # Main agent definition
-│   │   │   └── tools/        # search_civic_memory, find_jobs, etc.
+│   │   │   ├── civic_agent.py # Agent definition (Nova Pro)
+│   │   │   └── tools/        # All agent tools
 │   │   ├── api/               # FastAPI routes (20 endpoints)
 │   │   ├── db/                # CockroachDB connection
 │   │   ├── mcp/               # CockroachDB MCP client
 │   │   ├── skills/            # CockroachDB Agent Skills
-│   │   └── vector/            # Embedding + search
-│   ├── migrations/            # SQL schema
-│   ├── seed.py                # Demo data seeder
-│   └── requirements.txt
+│   │   └── vector/            # Titan embeddings + search
+│   ├── migrations/            # SQL schema (13 tables + indexes)
+│   └── seed.py                # Demo data seeder
 ├── frontend/                   # React TypeScript app
 │   └── src/
 │       ├── pages/             # Dashboard, Agent, Issues, Jobs, Activity
 │       ├── components/        # Layout, AgentActivityPanel
 │       └── services/          # API client
-├── docs/                       # Documentation
-│   ├── architecture-diagram.md
-│   ├── mcp-integration.md
-│   ├── vector-memory.md
-│   ├── cockroachdb-agent-skills.md
-│   ├── ccloud-setup.md
-│   ├── database.md
-│   ├── job-resolution.md
-│   ├── setup-steps.md
-│   ├── user-guide.md
-│   └── hackathon-evidence.md
-├── scripts/                    # Utility scripts
+├── docs/                       # Full documentation
+├── vercel.json                # Deployment config
 ├── CONTRIBUTING.md
 ├── LICENSE                     # MIT
 └── README.md
@@ -185,42 +232,69 @@ cjp/
 
 ---
 
-## API Endpoints
+## Agent Tools (11)
+
+The Strands agent dynamically selects from these tools based on the user's message:
+
+| Tool | Category | Purpose |
+|------|----------|---------|
+| `search_civic_memory` | Vector Search | Semantic search across all civic data |
+| `find_related_issues` | Vector Search | Detect duplicate/related issues |
+| `create_civic_issue` | CockroachDB MCP | Create issue with embedding |
+| `update_issue` | CockroachDB MCP | Change status/priority |
+| `get_issue_context` | CockroachDB MCP | Full state for cross-session memory |
+| `record_evidence` | CockroachDB MCP | Store supporting evidence |
+| `record_action` | CockroachDB MCP | Track accountability actions |
+| `find_job_opportunities` | Vector Search | Semantic job matching |
+| `record_job_match` | CockroachDB MCP | Persist job matches |
+| `get_issue_timeline` | CockroachDB MCP | Retrieve accountability history |
+| `add_timeline_event` | CockroachDB MCP | Record significant events |
+
+---
+
+## API Endpoints (20)
 
 | Method | Path | Description |
 |--------|------|-------------|
 | POST | `/api/chat` | Send message to Civic Agent |
+| GET | `/api/conversations` | List conversations |
+| GET | `/api/conversations/:id/messages` | Get messages |
 | GET | `/api/issues` | List civic issues |
-| GET | `/api/issues/:id` | Issue details |
+| GET | `/api/issues/:id` | Issue details + counts |
 | GET | `/api/issues/:id/timeline` | Accountability timeline |
-| GET | `/api/issues/:id/jobs` | Job matches for issue |
+| GET | `/api/issues/:id/reports` | Linked reports |
+| GET | `/api/issues/:id/evidence` | Supporting evidence |
+| GET | `/api/issues/:id/actions` | Actions taken |
+| GET | `/api/issues/:id/jobs` | Matched jobs |
+| POST | `/api/reports` | Submit citizen report |
 | GET | `/api/jobs` | Browse job opportunities |
+| POST | `/api/jobs` | Add job (admin) |
 | GET | `/api/agent/actions` | Agent activity log |
+| GET | `/api/memory/recent-issues` | Cross-session memory |
 | GET | `/api/memory/search` | Semantic memory search |
+| GET | `/api/memory/conversation-context/:id` | Full conversation context |
 | GET | `/api/dashboard/stats` | Dashboard statistics |
+| POST | `/api/auth/register` | Register user |
+| POST | `/api/auth/login` | Login |
 | GET | `/api/health` | Health check |
-
-Full API documentation available at `/docs` when running.
 
 ---
 
-## Agent Tools
+## Database (13 Tables + 5 Vector Indexes)
 
-The Strands agent has 11 tools it dynamically selects from:
+```sql
+-- Tables
+users, issues, reports, evidence, issue_reports,
+issue_timeline, actions, responses, agent_actions,
+conversations, messages, job_opportunities, job_matches
 
-| Tool | Purpose |
-|------|---------|
-| `search_civic_memory` | Vector search across all civic data |
-| `find_related_issues` | Detect duplicate/related issues |
-| `create_civic_issue` | Create new issue with embedding |
-| `update_issue` | Change status/priority/confidence |
-| `get_issue_context` | Full issue state (cross-session memory) |
-| `record_evidence` | Store supporting evidence |
-| `record_action` | Track accountability actions |
-| `find_job_opportunities` | Semantic job matching |
-| `record_job_match` | Persist job matches |
-| `get_issue_timeline` | Retrieve accountability history |
-| `add_timeline_event` | Record significant events |
+-- C-SPANN Distributed Vector Indexes (1024-dim)
+idx_issues_embedding, idx_reports_embedding,
+idx_evidence_embedding, idx_responses_embedding,
+idx_jobs_embedding
+```
+
+See [docs/database.md](docs/database.md) for full schema.
 
 ---
 
@@ -228,17 +302,35 @@ The Strands agent has 11 tools it dynamically selects from:
 
 | Document | Content |
 |----------|---------|
-| [Architecture Diagram](docs/architecture-diagram.md) | System diagrams (Mermaid + draw.io XML) |
-| [MCP Integration](docs/mcp-integration.md) | How MCP connects agent to CockroachDB |
-| [Vector Memory](docs/vector-memory.md) | Distributed vector indexing details |
-| [Agent Skills](docs/cockroachdb-agent-skills.md) | CockroachDB Agent Skills usage |
+| [Architecture Diagram](docs/architecture-diagram.md) | Mermaid + draw.io XML |
+| [draw.io File](docs/cjp-architecture.drawio) | Open in app.diagrams.net |
+| [MCP Integration](docs/mcp-integration.md) | How MCP bridges agent to DB |
+| [Vector Memory](docs/vector-memory.md) | C-SPANN indexing details |
+| [Agent Skills](docs/cockroachdb-agent-skills.md) | CockroachDB Agent Skills |
 | [ccloud Setup](docs/ccloud-setup.md) | CLI cluster management |
-| [Database Schema](docs/database.md) | All 13 tables documented |
-| [Job Resolution](docs/job-resolution.md) | Employment issue to job flow |
-| [Setup Steps](docs/setup-steps.md) | Detailed installation guide |
-| [User Guide](docs/user-guide.md) | End-user documentation |
-| [Demo Story](docs/demo-video-story.md) | 3-minute demo script |
-| [Hackathon Evidence](docs/hackathon-evidence.md) | Evidence matrix for judging |
+| [Database Schema](docs/database.md) | All 13 tables |
+| [Job Resolution](docs/job-resolution.md) | Employment → job flow |
+| [AWS Architecture](docs/aws-architecture.md) | Bedrock + services |
+| [Setup Steps](docs/setup-steps.md) | Detailed installation |
+| [User Guide](docs/user-guide.md) | End-user docs |
+| [Demo Story](docs/demo-video-story.md) | 3-min video script |
+| [Demo Flow](docs/demo-flow.md) | Quick demo checklist |
+| [Deployment](docs/deployment.md) | Vercel + alternatives |
+| [Hackathon Evidence](docs/hackathon-evidence.md) | Evidence matrix |
+
+---
+
+## Deployment
+
+**Live**: https://cjp-fawn.vercel.app
+
+Deployed on **Vercel** with:
+- Frontend: Vite build → static hosting
+- Backend: Python serverless function (FastAPI + Mangum)
+- Database: CockroachDB Cloud (us-east-1)
+- AI: Amazon Bedrock (us-east-1)
+
+See [docs/deployment.md](docs/deployment.md) for deployment guide.
 
 ---
 
@@ -247,33 +339,44 @@ The Strands agent has 11 tools it dynamically selects from:
 We welcome contributions! See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
 ```bash
-# Fork, clone, branch
 git checkout -b feature/your-feature
-
-# Make changes, test
-cd backend && python -m pytest
-cd frontend && npx tsc --noEmit
-
-# Commit and PR
+# Make changes
 git commit -m "feat: your feature"
 git push origin feature/your-feature
+# Open a Pull Request
 ```
 
 ---
 
 ## License
 
-This project is licensed under the **MIT License** — see [LICENSE](LICENSE) for details.
+This project is open source under the **[MIT License](LICENSE)**.
+
+---
+
+## The Story
+
+> **CJP doesn't just collect civic complaints.**
+>
+> It creates **persistent civic memory**, connects fragmented citizen voices, tracks issue history and accountability, and helps people discover **practical next actions**.
+
+```
+Strands Agent     = Brain (dynamic reasoning)
+MCP Server        = Bridge (agent ↔ CockroachDB)
+CockroachDB       = Memory (persistent civic state)
+Vector Indexes    = Understanding (semantic connections)
+Agent Skills      = Capabilities (reusable DB operations)
+ccloud CLI        = Operations (environment lifecycle)
+Amazon Bedrock    = Intelligence (Nova Pro + Titan)
+```
 
 ---
 
 ## Acknowledgments
 
-- [CockroachDB](https://www.cockroachlabs.com/) — Distributed database with vector support
-- [AWS Bedrock](https://aws.amazon.com/bedrock/) — Foundation models (Nova Pro + Titan)
+- [CockroachDB](https://www.cockroachlabs.com/) — Distributed database with native vector support
+- [Amazon Bedrock](https://aws.amazon.com/bedrock/) — Nova Pro + Titan Embed V2
 - [Strands Agents SDK](https://github.com/strands-agents/sdk-python) — Agent orchestration
-- Built for the CockroachDB x AWS Hackathon
+- [Vercel](https://vercel.com/) — Deployment platform
 
----
-
-> **CJP doesn't just collect civic complaints. It creates persistent civic memory, connects fragmented citizen voices, tracks issue history and accountability, and helps people discover practical next actions.**
+Built with persistence for the **CockroachDB x AWS Hackathon**.
