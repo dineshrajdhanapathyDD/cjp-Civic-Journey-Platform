@@ -35,3 +35,5 @@ ca-cert/
 # Logs
 *.log
 logs/
+
+.vercel

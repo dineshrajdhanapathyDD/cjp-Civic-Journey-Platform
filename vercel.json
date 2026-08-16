@@ -7,18 +7,7 @@
   ],
   "functions": {
     "api/index.py": {
-      "runtime": "@vercel/python@4.0.0",
       "maxDuration": 60
     }
-  },
-  "env": {
-    "COCKROACHDB_URL": "@cockroachdb_url",
-    "AWS_REGION": "@aws_region",
-    "AWS_ACCESS_KEY_ID": "@aws_access_key_id",
-    "AWS_SECRET_ACCESS_KEY": "@aws_secret_access_key",
-    "BEDROCK_MODEL_ID": "@bedrock_model_id",
-    "EMBEDDING_MODEL_ID": "@embedding_model_id",
-    "EMBEDDING_DIMENSIONS": "1024",
-    "APP_SECRET_KEY": "@app_secret_key"
   }
 }
