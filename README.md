@@ -39,7 +39,7 @@ Built for the **CockroachDB x AWS Hackathon**.
 | **Distributed Vector Indexing** | C-SPANN indexes on 5 tables (1024-dim) | Semantic search results |
 | **ccloud CLI** | Cluster creation, schema deploy, API keys | [docs/ccloud-setup.md](docs/ccloud-setup.md) |
 | **CockroachDB Agent Skills** | Transactional upsert, vector search, multi-table txn | [docs/cockroachdb-agent-skills.md](docs/cockroachdb-agent-skills.md) |
-| **Strands Agents SDK** | Dynamic tool selection with 11 agent tools | Agent reasoning visible |
+| **Strands Agents SDK** | Dynamic tool selection with 13 agent tools | Agent reasoning visible |
 | **Amazon Bedrock** | Nova Pro (reasoning) + Titan Embed V2 (vectors) | Agent responses + search |
 
 ### CockroachDB Memory Layer — Proven Working
@@ -120,11 +120,22 @@ See [docs/architecture-diagram.md](docs/architecture-diagram.md) for full diagra
 ## Features
 
 ### Civic Agent (AI-Powered)
-- Natural language civic issue reporting
-- Autonomous tool selection (not hardcoded flows)
+- Natural language civic issue reporting with category and location context
+- Autonomous tool selection (not hardcoded flows) with 13 agent tools
 - Persistent memory across sessions via CockroachDB
 - Semantic search for related issues and reports
 - Job opportunity matching for employment issues
+- Real-time execution timeline showing agent steps
+- Professional confirmation screen after report submission
+- Persistent memory demonstration (submit → retrieve from different session)
+
+### Frontend Experience
+- Back button navigation across all pages (no full page reloads)
+- Execution visibility: see what the agent is doing in real time
+- Error handling with retry on every backend operation
+- Expandable technology cards explaining each CockroachDB component
+- Responsive design with mobile navigation
+- Strong visual hierarchy with solid backgrounds and high contrast
 
 ### Distributed Vector Indexing
 - 5 C-SPANN vector indexes across tables
@@ -227,7 +238,7 @@ cjp/
 │   └── index.py               # FastAPI → Mangum adapter
 ├── backend/                    # Python backend
 │   ├── src/
-│   │   ├── agent/             # Strands agent + 11 tools
+│   │   ├── agent/             # Strands agent + 13 tools
 │   │   │   ├── civic_agent.py # Agent definition (Nova Pro)
 │   │   │   └── tools/        # All agent tools
 │   │   ├── api/               # FastAPI routes (20 endpoints)
@@ -240,7 +251,7 @@ cjp/
 ├── frontend/                   # React TypeScript app
 │   └── src/
 │       ├── pages/             # Dashboard, Agent, Issues, Jobs, Activity
-│       ├── components/        # Layout, AgentActivityPanel
+│       ├── components/        # Layout, BackButton, AgentActivityPanel, IndiaLocationSelector
 │       └── services/          # API client
 ├── docs/                       # Full documentation
 ├── vercel.json                # Deployment config
@@ -251,7 +262,7 @@ cjp/
 
 ---
 
-## Agent Tools (11)
+## Agent Tools (13)
 
 The Strands agent dynamically selects from these tools based on the user's message:
 
@@ -268,6 +279,8 @@ The Strands agent dynamically selects from these tools based on the user's messa
 | `record_job_match` | CockroachDB MCP | Persist job matches |
 | `get_issue_timeline` | CockroachDB MCP | Retrieve accountability history |
 | `add_timeline_event` | CockroachDB MCP | Record significant events |
+| `consult_cockroachdb_skill` | Agent Skills | Query CockroachDB expertise library |
+| `list_cockroachdb_skills` | Agent Skills | Discover available DB skills |
 
 ---
 
@@ -337,7 +350,6 @@ See [docs/database.md](docs/database.md) for full schema.
 | [Deployment](docs/deployment.md) | Vercel + alternatives |
 | [Hackathon Evidence](docs/hackathon-evidence.md) | Evidence matrix |
 | [Hackathon Submission](docs/hackathon-submission.md) | Full submission text |
-| [Project Article](docs/article.md) | Build story + challenges |
 
 ---
 

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import {
-  ArrowLeft, Clock, FileText, Shield, Briefcase, Activity,
+  Clock, FileText, Shield, Briefcase, Activity,
   ExternalLink, MapPin, ChevronRight, AlertCircle, CheckCircle,
   Target, BarChart3,
 } from 'lucide-react'
@@ -9,6 +9,7 @@ import {
   getIssue, getIssueTimeline, getIssueReports,
   getIssueEvidence, getIssueActions, getIssueJobs,
 } from '../services/api'
+import BackButton from '../components/BackButton'
 
 type Tab = 'overview' | 'timeline' | 'reports' | 'evidence' | 'actions' | 'jobs'
 
@@ -63,13 +64,16 @@ export default function IssueDetails() {
 
   return (
     <div className="p-4 lg:p-8 max-w-5xl mx-auto">
+      {/* Back Button */}
+      <BackButton to="/issues" label="← Back to Civic Issues" />
+
       {/* Breadcrumb */}
-      <nav className="flex items-center gap-1 text-xs text-gray-400 mb-4">
+      <nav className="flex items-center gap-1 text-xs text-gray-400 mb-4" aria-label="Breadcrumb">
         <Link to="/" className="hover:text-civic-600">Dashboard</Link>
         <ChevronRight size={12} />
         <Link to="/issues" className="hover:text-civic-600">Civic Issues</Link>
         <ChevronRight size={12} />
-        <span className="text-gray-600">Civic Journey</span>
+        <span className="text-gray-600 font-medium">Civic Journey</span>
       </nav>
 
       {/* Issue Header */}
@@ -126,24 +130,74 @@ export default function IssueDetails() {
       {/* Tab Content */}
       <div>
         {tab === 'overview' && (
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-            <div className="card py-4 text-center">
-              <p className="text-2xl font-bold text-civic-700">{counts.reports || 0}</p>
-              <p className="text-xs text-gray-500">Reports</p>
+          <div className="space-y-6">
+            {/* Stats Grid */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <div className="stat-card text-center">
+                <p className="text-2xl font-bold text-civic-700">{counts.reports || 0}</p>
+                <p className="text-xs font-semibold text-gray-600">Reports</p>
+              </div>
+              <div className="stat-card text-center">
+                <p className="text-2xl font-bold text-teal-700">{counts.evidence || 0}</p>
+                <p className="text-xs font-semibold text-gray-600">Evidence</p>
+              </div>
+              <div className="stat-card text-center">
+                <p className="text-2xl font-bold text-orange-700">{counts.actions || 0}</p>
+                <p className="text-xs font-semibold text-gray-600">Actions</p>
+              </div>
+              <div className="stat-card text-center">
+                <p className="text-2xl font-bold text-green-700">
+                  {issue.status === 'resolved' ? '100%' : `${Math.min(95, Math.round(issue.confidence * 100))}%`}
+                </p>
+                <p className="text-xs font-semibold text-gray-600">Confidence</p>
+              </div>
             </div>
-            <div className="card py-4 text-center">
-              <p className="text-2xl font-bold text-teal-600">{counts.evidence || 0}</p>
-              <p className="text-xs text-gray-500">Evidence</p>
+
+            {/* Quick Actions */}
+            <div className="card bg-gray-50 border-gray-200">
+              <h3 className="text-sm font-bold text-gray-800 mb-3">Explore This Issue</h3>
+              <div className="flex flex-wrap gap-2">
+                <Link to="/agent" className="text-xs bg-civic-100 text-civic-800 px-3 py-1.5 rounded-lg hover:bg-civic-200 transition-colors font-medium border border-civic-200">
+                  Ask Agent About This Issue
+                </Link>
+                <button onClick={() => setTab('timeline')} className="text-xs bg-blue-100 text-blue-800 px-3 py-1.5 rounded-lg hover:bg-blue-200 transition-colors font-medium border border-blue-200">
+                  View Timeline
+                </button>
+                <button onClick={() => setTab('jobs')} className="text-xs bg-green-100 text-green-800 px-3 py-1.5 rounded-lg hover:bg-green-200 transition-colors font-medium border border-green-200">
+                  Find Opportunities
+                </button>
+              </div>
             </div>
-            <div className="card py-4 text-center">
-              <p className="text-2xl font-bold text-orange-600">{counts.actions || 0}</p>
-              <p className="text-xs text-gray-500">Actions</p>
-            </div>
-            <div className="card py-4 text-center">
-              <p className="text-2xl font-bold text-green-600">
-                {issue.status === 'resolved' ? '100%' : `${Math.min(95, Math.round(issue.confidence * 100))}%`}
-              </p>
-              <p className="text-xs text-gray-500">Journey Progress</p>
+
+            {/* Issue Metadata */}
+            <div className="card">
+              <h3 className="text-sm font-bold text-gray-800 mb-3">Issue Details</h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+                <div>
+                  <span className="text-xs text-gray-500">Category</span>
+                  <p className="font-medium capitalize text-gray-900">{issue.category}</p>
+                </div>
+                <div>
+                  <span className="text-xs text-gray-500">Location</span>
+                  <p className="font-medium text-gray-900">{issue.location || 'Not specified'}</p>
+                </div>
+                <div>
+                  <span className="text-xs text-gray-500">Created</span>
+                  <p className="font-medium text-gray-900">{new Date(issue.created_at).toLocaleString('en-IN')}</p>
+                </div>
+                <div>
+                  <span className="text-xs text-gray-500">Last Updated</span>
+                  <p className="font-medium text-gray-900">{new Date(issue.updated_at).toLocaleString('en-IN')}</p>
+                </div>
+                <div>
+                  <span className="text-xs text-gray-500">Report Count</span>
+                  <p className="font-medium text-gray-900">{issue.report_count}</p>
+                </div>
+                <div>
+                  <span className="text-xs text-gray-500">Issue ID</span>
+                  <p className="font-mono text-xs text-gray-700">{issue.id}</p>
+                </div>
+              </div>
             </div>
           </div>
         )}

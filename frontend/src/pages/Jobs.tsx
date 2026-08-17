@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Briefcase, ExternalLink, MapPin, Clock, Filter, Search, Target } from 'lucide-react'
 import { getJobs } from '../services/api'
 import IndiaLocationSelector from '../components/IndiaLocationSelector'
+import BackButton from '../components/BackButton'
 
 export default function Jobs() {
   const [jobs, setJobs] = useState<any[]>([])
@@ -41,6 +42,8 @@ export default function Jobs() {
 
   return (
     <div className="p-4 lg:p-8 max-w-6xl mx-auto">
+      <BackButton to="/" label="← Back to Dashboard" />
+
       {/* Header */}
       <div className="mb-6">
         <h1 className="text-2xl font-bold">Job & Opportunity Hub</h1>

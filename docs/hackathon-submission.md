@@ -47,12 +47,16 @@ civic_agent            | process_message
 Visible at: https://cjp-fawn.vercel.app/activity
 
 **Key features:**
-- 11 agent tools dynamically selected (not hardcoded sequences)
+- 13 agent tools dynamically selected (not hardcoded sequences)
 - Semantic search across issues, reports, evidence, and jobs via CockroachDB C-SPANN vector indexes
 - Full accountability timeline for every civic issue
 - Job resolution for employment-related issues with verified listings
 - Agent Activity panel showing every MCP operation and vector search in real-time
 - Persistent cross-session memory proven working
+- End-to-end report flow: form → agent → CockroachDB → confirmation with execution timeline
+- Explore mode for persistent memory retrieval demonstration
+- Back navigation across all pages with no full reloads
+- Expandable technology cards explaining each CockroachDB component
 
 ---
 
@@ -62,7 +66,7 @@ Visible at: https://cjp-fawn.vercel.app/activity
 
 **Agent Layer:**
 - Strands Agents SDK orchestrates the agent with Amazon Bedrock Nova Pro for reasoning
-- 11 tools (`search_civic_memory`, `create_civic_issue`, `find_job_opportunities`, etc.) registered as Strands tools
+- 13 tools (`search_civic_memory`, `create_civic_issue`, `find_job_opportunities`, `consult_cockroachdb_skill`, etc.) registered as Strands tools
 - The agent's system prompt guides strategy but doesn't force sequences — Nova Pro decides dynamically
 
 **Database Layer:**
@@ -78,8 +82,13 @@ Visible at: https://cjp-fawn.vercel.app/activity
 
 **Frontend:**
 - React 18 + TypeScript + Tailwind CSS
-- Dashboard, Civic Agent chat, Issues explorer, Jobs browser, Agent Activity monitor
-- Real-time Agent Activity sidebar shows MCP operations as they happen
+- Dashboard with real CockroachDB metrics, expandable technology cards, system status
+- Civic Agent with end-to-end report flow: form → execution timeline → confirmation screen
+- Explore mode for persistent memory retrieval demonstration
+- Issues explorer with detail views (timeline, reports, evidence, actions, jobs)
+- Jobs browser with semantic search and filters
+- Real-time Agent Activity monitor with MCP/vector/skills categories
+- Back navigation on all pages, error handling with retry, accessible UI
 
 **Deployment:**
 - Vercel (frontend static + Python serverless function via Mangum)

@@ -4,6 +4,7 @@ import { AlertCircle, Clock, ChevronRight, Filter, MapPin, Search } from 'lucide
 import { getIssues } from '../services/api'
 import { CIVIC_CATEGORIES } from '../data/indiaLocations'
 import IndiaLocationSelector from '../components/IndiaLocationSelector'
+import BackButton from '../components/BackButton'
 
 const statusColors: Record<string, string> = {
   open: 'bg-blue-100 text-blue-800',
@@ -53,6 +54,8 @@ export default function Issues() {
 
   return (
     <div className="p-4 lg:p-8 max-w-6xl mx-auto">
+      <BackButton to="/" label="← Back to Dashboard" />
+
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
         <div>
