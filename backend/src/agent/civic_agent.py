@@ -32,6 +32,7 @@ from src.agent.tools.evidence import record_evidence
 from src.agent.tools.actions import record_action
 from src.agent.tools.jobs import find_job_opportunities, record_job_match
 from src.agent.tools.timeline import get_issue_timeline, add_timeline_event
+from src.agent.tools.cockroachdb_expertise import consult_cockroachdb_skill, list_cockroachdb_skills
 from src.db.connection import get_cursor
 
 logger = logging.getLogger(__name__)
@@ -67,6 +68,21 @@ TOOL USAGE STRATEGY:
 - record_job_match: Use to persist relevant job matches for a user/issue
 - get_issue_timeline: Use to review the accountability history
 - add_timeline_event: Use to record significant events
+- consult_cockroachdb_skill: Use when you need CockroachDB expertise for database decisions (transaction design, query optimization, security, observability)
+- list_cockroachdb_skills: Use to discover available CockroachDB operational expertise
+
+COCKROACHDB EXPERTISE:
+You have access to a library of 34 structured CockroachDB Agent Skills spanning:
+- Application Development (transaction patterns, multi-region design)
+- Observability & Diagnostics (range distribution, statement profiling, live activity triage)
+- Operations & Lifecycle (cluster health, capacity, maintenance, upgrades)
+- Security & Governance (CIS benchmarks, audit logging, TLS, RBAC)
+- Query & Schema Design (SQL best practices)
+- Onboarding & Migrations (MOLT tools, local clusters)
+
+When making database decisions — especially around transaction design, index strategy,
+or performance issues — consult the relevant skill BEFORE implementing. This ensures
+your CockroachDB operations follow production-grade patterns.
 
 Remember: You are an agentic system with persistent memory. Your state persists across sessions via CockroachDB. Act autonomously and make intelligent decisions about what tools to use and when."""
 
@@ -83,6 +99,8 @@ AGENT_TOOLS = [
     record_job_match,
     get_issue_timeline,
     add_timeline_event,
+    consult_cockroachdb_skill,
+    list_cockroachdb_skills,
 ]
 
 
