@@ -1,4 +1,4 @@
-import { Activity, Database, Search, Brain, Briefcase, CheckCircle, Loader2, Shield, Zap } from 'lucide-react'
+import { Activity, Database, Search, Brain, Briefcase, CheckCircle, Loader2, Shield, Zap, Cloud } from 'lucide-react'
 
 interface AgentAction {
   id: string
@@ -24,6 +24,7 @@ const toolIcons: Record<string, any> = {
   record_action: Database,
   find_job_opportunities: Briefcase,
   record_job_match: Briefcase,
+  aws_career_search: Cloud,
   get_issue_timeline: Activity,
   add_timeline_event: Activity,
   civic_agent: Brain,
@@ -39,6 +40,7 @@ const toolLabels: Record<string, string> = {
   record_action: 'CockroachDB MCP',
   find_job_opportunities: 'Job Semantic Search',
   record_job_match: 'CockroachDB MCP',
+  aws_career_search: 'AWS Career Agent',
   get_issue_timeline: 'CockroachDB MCP',
   add_timeline_event: 'CockroachDB MCP',
   civic_agent: 'Strands Agent',
@@ -54,6 +56,7 @@ const toolColors: Record<string, string> = {
   record_action: 'text-green-400',
   find_job_opportunities: 'text-yellow-400',
   record_job_match: 'text-yellow-400',
+  aws_career_search: 'text-orange-400',
   get_issue_timeline: 'text-cyan-400',
   add_timeline_event: 'text-cyan-400',
   civic_agent: 'text-purple-400',
@@ -114,6 +117,7 @@ export default function AgentActivityPanel({ actions, isProcessing }: Props) {
                 { icon: Zap, label: 'MCP Server', status: 'Ready' },
                 { icon: Search, label: 'Vector Search', status: 'Ready' },
                 { icon: Briefcase, label: 'Job Matching', status: 'Ready' },
+                { icon: Cloud, label: 'AWS Career Agent', status: 'Ready' },
               ].map(({ icon: SIcon, label, status }) => (
                 <div key={label} className="flex items-center gap-2 px-2 py-1.5 rounded bg-gray-800/40">
                   <SIcon size={12} className="text-gray-500" />

@@ -14,6 +14,8 @@ from src.api.models import (
     LoginRequest,
     CreateReportRequest,
     CreateJobRequest,
+    CareerSearchRequest,
+    CareerSearchResponse,
     IssueResponse,
     AgentActionResponse,
     TimelineEventResponse,
@@ -448,6 +450,56 @@ async def create_job(request: CreateJobRequest):
 
         return {"success": True, "job_id": str(result["id"])}
     except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+# --- AWS Career Agent Endpoints ---
+
+@router.post("/api/career/search", response_model=CareerSearchResponse)
+async def career_search(request: CareerSearchRequest):
+    """AWS Career Agent: Search jobs with skill matching and gap analysis.
+
+    Uses CockroachDB vector search to find real job opportunities,
+    extracts skills from the query, and performs skill comparison.
+    All data comes from the real job_opportunities table.
+    """
+    from src.agent.tools.career_search import career_search as do_career_search
+
+    try:
+        result = do_career_search(
+            query=request.query,
+            user_skills=request.skills,
+            location=request.location,
+            experience_level=request.experience_level,
+            limit=request.limit,
+        )
+
+        # Log agent activity for this career search
+        try:
+            with get_cursor() as cursor:
+                cursor.execute(
+                    """
+                    INSERT INTO agent_actions
+                        (tool_name, action, status, duration_ms, result)
+                    VALUES ('aws_career_search', %s, 'completed', %s, %s)
+                    """,
+                    (
+                        f"Career search: {request.query[:80]}",
+                        result.get("duration_ms", 0),
+                        json.dumps({
+                            "query": request.query,
+                            "skills": request.skills,
+                            "total_found": result.get("total_found", 0),
+                        }),
+                    ),
+                )
+        except Exception as e:
+            logger.error(f"Error logging career search activity: {e}")
+
+        return CareerSearchResponse(**result)
+
+    except Exception as e:
+        logger.error(f"Career search error: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
 

@@ -6,6 +6,7 @@ import {
   AlertCircle,
   Briefcase,
   Activity,
+  Cloud,
   Menu,
   X,
   ChevronRight,
@@ -14,6 +15,7 @@ import {
 const navItems = [
   { to: '/', icon: LayoutDashboard, label: 'Dashboard' },
   { to: '/agent', icon: MessageSquare, label: 'Civic Agent' },
+  { to: '/career', icon: Cloud, label: 'AWS Career Agent' },
   { to: '/issues', icon: AlertCircle, label: 'Civic Issues' },
   { to: '/jobs', icon: Briefcase, label: 'Opportunities' },
   { to: '/activity', icon: Activity, label: 'Agent Activity' },

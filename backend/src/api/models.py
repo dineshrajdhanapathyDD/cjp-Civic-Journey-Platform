@@ -51,6 +51,49 @@ class CreateJobRequest(BaseModel):
     expires_at: Optional[str] = None
 
 
+class CareerSearchRequest(BaseModel):
+    """AWS Career Agent search request."""
+    query: str = Field(..., min_length=1, max_length=1000)
+    skills: Optional[List[str]] = None
+    location: Optional[str] = None
+    experience_level: Optional[str] = None
+    limit: int = Field(default=10, ge=1, le=50)
+
+
+class CareerSearchJobResult(BaseModel):
+    """A single job result with skill analysis."""
+    id: str
+    title: str
+    company: str
+    description: str
+    location: Optional[str] = None
+    work_type: Optional[str] = None
+    employment_type: Optional[str] = None
+    experience_level: Optional[str] = None
+    salary_range: Optional[str] = None
+    apply_url: Optional[str] = None
+    source: Optional[str] = None
+    source_url: Optional[str] = None
+    posted_at: Optional[str] = None
+    similarity_score: float
+    required_skills: List[str] = []
+    matching_skills: List[str] = []
+    missing_skills: List[str] = []
+    match_percentage: float
+
+
+class CareerSearchResponse(BaseModel):
+    """AWS Career Agent search response."""
+    success: bool
+    query: str
+    user_skills: List[str] = []
+    extracted_skills: List[str] = []
+    jobs: List[CareerSearchJobResult] = []
+    total_found: int = 0
+    duration_ms: int = 0
+    steps: List[Dict[str, Any]] = []
+
+
 # --- Response Models ---
 
 class ChatResponse(BaseModel):

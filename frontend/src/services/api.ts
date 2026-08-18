@@ -81,6 +81,58 @@ export async function getJobs(filters?: { location?: string; work_type?: string;
   return request<{ jobs: any[]; total: number }>(`/jobs${query}`);
 }
 
+// AWS Career Agent
+export interface CareerSearchResult {
+  success: boolean;
+  query: string;
+  user_skills: string[];
+  extracted_skills: string[];
+  jobs: CareerJobResult[];
+  total_found: number;
+  duration_ms: number;
+  steps: { step: string; tool: string; status: string; result?: string }[];
+}
+
+export interface CareerJobResult {
+  id: string;
+  title: string;
+  company: string;
+  description: string;
+  location: string | null;
+  work_type: string | null;
+  employment_type: string | null;
+  experience_level: string | null;
+  salary_range: string | null;
+  apply_url: string | null;
+  source: string | null;
+  source_url: string | null;
+  posted_at: string | null;
+  similarity_score: number;
+  required_skills: string[];
+  matching_skills: string[];
+  missing_skills: string[];
+  match_percentage: number;
+}
+
+export async function careerSearch(
+  query: string,
+  skills?: string[],
+  location?: string,
+  experienceLevel?: string,
+  limit?: number,
+): Promise<CareerSearchResult> {
+  return request<CareerSearchResult>('/career/search', {
+    method: 'POST',
+    body: JSON.stringify({
+      query,
+      skills: skills?.length ? skills : undefined,
+      location: location || undefined,
+      experience_level: experienceLevel || undefined,
+      limit: limit || 10,
+    }),
+  });
+}
+
 // Reports
 export async function submitReport(content: string, userId?: string) {
   return request<{ success: boolean; report_id: string; message: string }>('/reports', {

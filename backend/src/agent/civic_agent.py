@@ -31,6 +31,7 @@ from src.agent.tools.issues import (
 from src.agent.tools.evidence import record_evidence
 from src.agent.tools.actions import record_action
 from src.agent.tools.jobs import find_job_opportunities, record_job_match
+from src.agent.tools.career_search import aws_career_search
 from src.agent.tools.timeline import get_issue_timeline, add_timeline_event
 from src.agent.tools.cockroachdb_expertise import consult_cockroachdb_skill, list_cockroachdb_skills
 from src.db.connection import get_cursor
@@ -66,6 +67,7 @@ TOOL USAGE STRATEGY:
 - record_action: Use to track actions being taken
 - find_job_opportunities: Use for employment-related issues to find practical resolutions
 - record_job_match: Use to persist relevant job matches for a user/issue
+- aws_career_search: Use when a citizen asks about AWS/Cloud/DevOps careers or job searching with skills matching. Returns real jobs with skill gap analysis.
 - get_issue_timeline: Use to review the accountability history
 - add_timeline_event: Use to record significant events
 - consult_cockroachdb_skill: Use when you need CockroachDB expertise for database decisions (transaction design, query optimization, security, observability)
@@ -97,6 +99,7 @@ AGENT_TOOLS = [
     record_action,
     find_job_opportunities,
     record_job_match,
+    aws_career_search,
     get_issue_timeline,
     add_timeline_event,
     consult_cockroachdb_skill,
@@ -347,6 +350,8 @@ class CivicAgent:
                 action_desc = f"Searching jobs: {tool_input.get('query', '')[:80]}"
             elif tool_name == "record_job_match":
                 action_desc = f"Recording job match"
+            elif tool_name == "aws_career_search":
+                action_desc = f"AWS Career Search: {tool_input.get('query', '')[:80]}"
             elif tool_name == "record_evidence":
                 action_desc = f"Recording evidence: {tool_input.get('source', '')[:50]}"
             elif tool_name == "record_action":
