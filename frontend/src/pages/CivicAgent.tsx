@@ -8,7 +8,7 @@ import {
 import AgentActivityPanel from '../components/AgentActivityPanel'
 import IndiaLocationSelector from '../components/IndiaLocationSelector'
 import { CIVIC_CATEGORIES } from '../data/indiaLocations'
-import { sendMessage, getAgentActions } from '../services/api'
+import { sendMessage, getAgentActions, submitReport } from '../services/api'
 import BackButton from '../components/BackButton'
 
 type Mode = 'report' | 'explore' | 'opportunities'
@@ -155,6 +155,12 @@ export default function CivicAgent() {
 
       // Show confirmation for report mode on first message
       if (mode === 'report' && messages.length === 0) {
+        // Also persist the citizen report in the reports table
+        try {
+          await submitReport(msg)
+        } catch {
+          // Non-blocking — agent already processed the message
+        }
         setReportResult({
           conversationId: result.conversation_id,
           response: cleanResponse,

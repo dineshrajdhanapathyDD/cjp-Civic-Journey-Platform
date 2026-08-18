@@ -69,7 +69,7 @@ export default function Dashboard() {
       color: 'text-green-700',
       bg: 'bg-green-50',
       border: 'border-green-200',
-      detail: 'The CJP agent uses the CockroachDB MCP Server to persist conversations, issues, reports, evidence, and timeline events. Every interaction is stored as operational memory that persists across sessions.',
+      detail: 'The CJP agent uses the CockroachDB MCP Server to persist conversations, issues, reports, evidence, and timeline events. Interactions are stored as operational memory that persists across sessions.',
     },
     {
       icon: Search,

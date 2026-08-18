@@ -51,7 +51,7 @@ Visible at: https://cjp-fawn.vercel.app/activity
 - Semantic search across issues, reports, evidence, and jobs via CockroachDB C-SPANN vector indexes
 - Full accountability timeline for every civic issue
 - Job resolution for employment-related issues with verified listings
-- Agent Activity panel showing every MCP operation and vector search in real-time
+- Agent Activity panel showing MCP operations and vector searches in real-time
 - Persistent cross-session memory proven working
 - End-to-end report flow: form → agent → CockroachDB → confirmation with execution timeline
 - Explore mode for persistent memory retrieval demonstration
@@ -76,9 +76,10 @@ Visible at: https://cjp-fawn.vercel.app/activity
 - CockroachDB Agent Skills provide reusable capabilities: transactional upsert, vector similarity search, multi-table transactions
 
 **MCP Integration:**
-- CockroachDB Cloud MCP Server bridges the Strands agent to the database
-- Agent discovers available tools through MCP protocol
-- All CRUD and search operations flow through MCP
+- CockroachDB Cloud MCP Server configured as the database access layer
+- MCP client (`backend/src/mcp/client.py`) implements the stdio transport protocol with tool discovery
+- Agent tools perform CockroachDB operations (the same operations MCP exposes) via direct database connections for lower latency in the serverless environment
+- MCP Server verified working for external AI assistant access (development tooling)
 
 **Frontend:**
 - React 18 + TypeScript + Tailwind CSS
@@ -131,7 +132,7 @@ Not a chatbot with a database. The agent retrieves full context from CockroachDB
 - Agent Skills for reusable database operations
 
 **3. CockroachDB Memory Layer Fully Visible**
-Every single tool call the agent makes is logged to CockroachDB and displayed in the Agent Activity UI. You can see `search_civic_memory`, `create_civic_issue`, `find_job_opportunities`, and `record_job_match` all appear with descriptions showing what CockroachDB operation was performed.
+Agent tool interactions are logged to CockroachDB and displayed in the Agent Activity UI. You can see `search_civic_memory`, `create_civic_issue`, `find_job_opportunities`, and `record_job_match` appear with descriptions showing what CockroachDB operation was performed.
 
 **4. Semantic Issue Deduplication**
 "No software careers", "IT opportunities lacking", "engineers leaving" — all connect to the same underlying issue through vector similarity, even though they share zero keywords.
@@ -140,7 +141,7 @@ Every single tool call the agent makes is logged to CockroachDB and displayed in
 The platform doesn't just identify problems — it helps solve them. Employment issues trigger semantic job matching with verified listings, real companies, and actual application links. In testing, the agent found 6 relevant jobs from our seeded data.
 
 **6. Agent Activity Transparency**
-Every MCP operation, every vector search, every database write is visible in the Agent Activity panel. No black box — citizens can see exactly what the AI is doing with their data.
+MCP operations, vector searches, and database writes are surfaced in the Agent Activity panel. Citizens can see what the AI is doing with their data — no black box.
 
 **7. Live Production Deployment**
 Not a demo on localhost. The full system runs at https://cjp-fawn.vercel.app with real CockroachDB Cloud connectivity, real Bedrock inference, and real vector search — verified working with `/api/health` returning `{"status": "healthy", "database": "connected"}`.
@@ -159,7 +160,7 @@ Combining relational data + vector embeddings + serializable transactions in one
 Different embedding models produce different similarity score ranges. Always test empirically rather than assuming 0.7 is "good" — Titan V2 operates in a lower range than OpenAI embeddings.
 
 **3. Agentic Systems Need Audit Trails**
-Logging every tool invocation, every database operation, and every decision the agent makes is essential — both for debugging and for user trust.
+Logging tool invocations, database operations, and agent decisions is essential — both for debugging and for user trust.
 
 **4. MCP Protocol Has Real Value**
 The MCP server abstraction means the agent doesn't need direct database credentials or SQL knowledge. It communicates through a protocol, which is cleaner for security and maintainability.

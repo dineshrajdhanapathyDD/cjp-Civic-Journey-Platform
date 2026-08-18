@@ -35,7 +35,7 @@ Built for the **CockroachDB x AWS Hackathon**.
 
 | Requirement | Implementation | Evidence |
 |-------------|---------------|----------|
-| **CockroachDB Cloud MCP Server** | Agent queries/writes through official MCP server | Agent Activity panel |
+| **CockroachDB Cloud MCP Server** | Configured as the database access layer; MCP client defined for agent-DB bridge | Agent Activity panel, MCP client code |
 | **Distributed Vector Indexing** | C-SPANN indexes on 5 tables (1024-dim) | Semantic search results |
 | **ccloud CLI** | Cluster creation, schema deploy, API keys | [docs/ccloud-setup.md](docs/ccloud-setup.md) |
 | **CockroachDB Agent Skills** | Transactional upsert, vector search, multi-table txn | [docs/cockroachdb-agent-skills.md](docs/cockroachdb-agent-skills.md) |
@@ -44,7 +44,7 @@ Built for the **CockroachDB x AWS Hackathon**.
 
 ### CockroachDB Memory Layer — Proven Working
 
-Every agent tool interaction is logged to CockroachDB and visible at `/activity`:
+Agent tool interactions are logged to CockroachDB and visible at `/activity`:
 
 ```
 tool_name              | action

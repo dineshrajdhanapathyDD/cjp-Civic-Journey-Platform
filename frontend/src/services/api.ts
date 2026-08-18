@@ -81,6 +81,14 @@ export async function getJobs(filters?: { location?: string; work_type?: string;
   return request<{ jobs: any[]; total: number }>(`/jobs${query}`);
 }
 
+// Reports
+export async function submitReport(content: string, userId?: string) {
+  return request<{ success: boolean; report_id: string; message: string }>('/reports', {
+    method: 'POST',
+    body: JSON.stringify({ content, source: 'web', user_id: userId }),
+  });
+}
+
 // Agent Activity
 export async function getAgentActions(conversationId?: string) {
   const params = conversationId ? `?conversation_id=${conversationId}` : '';
